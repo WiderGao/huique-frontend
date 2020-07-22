@@ -9,11 +9,12 @@
       :title="detail.name"
       :thumb="detail.img"
     />
+    <van-divider :style="{ borderColor: '#323233', margin: '0' }"></van-divider>
   </div>
 </template>
 
 <script>
-import { Card } from "vant";
+import { Card, Divider } from "vant";
 
 export default {
   /* details 需要包括：
@@ -30,7 +31,8 @@ export default {
    */
   props: ["detail"],
   components: {
-    [Card.name]: Card
+    [Card.name]: Card,
+    [Divider.name]: Divider
   },
   data() {
     return {};
