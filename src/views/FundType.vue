@@ -6,7 +6,7 @@
         :key="item.fundid"
         :title="item.name"
         :label="item.record_num"
-        :to="$route.path+'/'+item.name"
+        :to="'/fund/'+item.fundid"
         is-link
         center
       ></van-cell>
@@ -19,27 +19,27 @@ import { Cell, CellGroup } from "vant";
 export default {
   components: {
     [Cell.name]: Cell,
-    [CellGroup.name]: CellGroup
+    [CellGroup.name]: CellGroup,
   },
   data() {
     return {
-      fundList: []
+      fundList: [],
     };
   },
-  mounted() {
+  created() {
     this.$ajax
       .get("fundtypemsg/fundmsg", {
         params: {
-          name: this.$route.params.disease
-        }
+          name: this.$route.params.disease,
+        },
       })
-      .then(response => {
-        this.fundList = response.data;
+      .then((response) => {
+        this.fundList = response.data.msg;
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
-  }
+  },
 };
 </script>
 

@@ -23,7 +23,7 @@
             :key="item.fundtypeid"
             :title="item.name"
             :label="item.num+'条基金信息'"
-            :to="$route.path+'/'+item.name"
+            :to="'/fundtype/'+item.name"
             is-link
             center
           >
@@ -41,6 +41,7 @@
         </van-cell-group>
       </van-tab>
       <van-tab title="申请帮助">
+        <div class="search-info-desc">灰雀志愿者专人帮助/迅速回复/帮助申请</div>
         <van-cell-group>
           <van-cell title="代写轻松筹/水滴筹" label="仅为部分人服务" is-link center to="/raise-help">
             <template #icon>
@@ -81,14 +82,14 @@ export default {
     [Image.name]: Image,
     [Search.name]: Search,
     [Tab.name]: Tab,
-    [Tabs.name]: Tabs
+    [Tabs.name]: Tabs,
   },
   data() {
     return {
       fundType: [],
       showList: [],
       searchValue: "",
-      activeTab: 0
+      activeTab: 0,
     };
   },
   methods: {
@@ -99,14 +100,15 @@ export default {
       }
       this.$ajax
         .get("search/fundtype", {
-          params: { keyword: text }
+          params: { keyword: text },
         })
-        .then(response => {
-          this.showList = this.fundType.filter(item =>
-            response.data.includes(item.name)
-          );
+        .then((response) => {
+          if (response.data.status == 200)
+            this.showList = this.fundType.filter((item) =>
+              response.data.msg.includes(item.name)
+            );
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -117,14 +119,16 @@ export default {
       let summary = 0;
       for (let i = 0; i < arr.length; i++) summary += arr[i];
       return summary;
-    }
+    },
   },
-  mounted() {
-    this.$ajax.get("fundtypemsg").then(response => {
-      this.fundType = response.data;
-      this.showList = this.fundType;
+  created() {
+    this.$ajax.get("fundtypemsg").then((response) => {
+      if (response.data.status == 200) {
+        this.fundType = response.data.msg;
+        this.showList = this.fundType;
+      }
     });
-  }
+  },
 };
 </script>
 

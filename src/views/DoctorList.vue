@@ -17,27 +17,27 @@ import { Cell, CellGroup } from "vant";
 export default {
   components: {
     [Cell.name]: Cell,
-    [CellGroup.name]: CellGroup
+    [CellGroup.name]: CellGroup,
   },
   data() {
     return {
-      doctorList: []
+      doctorList: [],
     };
   },
   mounted() {
     this.$ajax
       .get("sectionmsg/expert", {
         params: {
-          section: this.$route.params.section
-        }
+          section: this.$route.params.section,
+        },
       })
-      .then(response => {
-        this.doctorList = response.data;
+      .then((response) => {
+        if (response.data.status == 200) this.doctorList = response.data.msg;
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
-  }
+  },
 };
 </script>
 

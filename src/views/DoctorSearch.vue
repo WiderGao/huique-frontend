@@ -40,23 +40,23 @@ export default {
   components: {
     [Cell.name]: Cell,
     [CellGroup.name]: CellGroup,
-    [Search.name]: Search
+    [Search.name]: Search,
   },
   data() {
     return {
       searchValue: "",
       sectionList: [],
-      showList: []
+      showList: [],
     };
   },
   mounted() {
     this.$ajax
       .get("sectionmsg")
-      .then(response => {
-        this.sectionList = response.data;
+      .then((response) => {
+        if (response.data.status == 200) this.sectionList = response.data.msg;
         this.showList = this.sectionList;
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   },
@@ -68,19 +68,19 @@ export default {
       }
       this.$ajax
         .get("search/expert", {
-          params: { keyword: text }
+          params: { keyword: text },
         })
-        .then(response => {
-          this.showList = response.data;
+        .then((response) => {
+          if (response.data.status == 200) this.showList = response.data.msg;
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
     onClear() {
       this.showList = this.sectionList;
-    }
-  }
+    },
+  },
 };
 </script>
 

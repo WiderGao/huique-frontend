@@ -1,9 +1,11 @@
 <template>
-  <van-tabbar route>
-    <van-tabbar-item replace to="/home" icon="wap-home-o">活动</van-tabbar-item>
-    <van-tabbar-item replace to="/info" icon="search">信息查询</van-tabbar-item>
-    <van-tabbar-item replace to="/profile" icon="user-o">我</van-tabbar-item>
-  </van-tabbar>
+  <div class="bottom-tab">
+    <van-tabbar route>
+      <van-tabbar-item replace to="/home" icon="wap-home-o">活动</van-tabbar-item>
+      <van-tabbar-item replace to="/info" icon="search">信息查询</van-tabbar-item>
+      <van-tabbar-item replace to="/profile" icon="user-o">我</van-tabbar-item>
+    </van-tabbar>
+  </div>
 </template>
 
 <script>
@@ -13,8 +15,8 @@ export default {
   components: {
     [Tabbar.name]: Tabbar,
     [TabbarItem.name]: TabbarItem,
-    [Icon.name]: Icon
-  }
+    [Icon.name]: Icon,
+  },
 };
 </script>
 

@@ -17,42 +17,83 @@
       <van-cell title="联系方式" :label="detail.contact" clickable center></van-cell>
       <van-cell title="申请表下载" :url="detail.form" is-link center></van-cell>
     </van-cell-group>
+    <div style="margin: 16px;">
+      <van-button
+        v-if="$store.state.storedFund.map(item => item.fundid).includes(detail.fundid)"
+        round
+        block
+        type="info"
+        @click="handleCancel"
+      >取消收藏</van-button>
+      <van-button v-else round block type="info" @click="handleStore">收藏</van-button>
+    </div>
   </div>
 </template>
 
 <script>
-import { Cell, CellGroup, Image } from "vant";
+import { Cell, CellGroup, Image, Button, Toast } from "vant";
 
 export default {
   components: {
     [Cell.name]: Cell,
     [CellGroup.name]: CellGroup,
-    [Image.name]: Image
+    [Image.name]: Image,
+    [Button.name]: Button,
+    [Toast.name]: Toast,
   },
   data() {
     return {
-      detail: {}
+      detail: {},
     };
   },
-  mounted() {
+  methods: {
+    //收藏
+    handleStore() {
+      this.$ajax
+        .get("/fundtypemsg/fundmsg/storefund", {
+          params: {
+            fundid: this.detail.fundid,
+          },
+        })
+        .then((response) => {
+          if (response.data.status == 200) {
+            this.$store.commit("addStoredFund", this.detail);
+            this.$toast.success(response.data.msg);
+          } else this.$toast.fail(response.data.msg);
+        });
+    },
+    //取消收藏
+    handleCancel() {
+      this.$ajax
+        .get("/fundtypemsg/fundmsg/cancelfund", {
+          params: {
+            fundid: this.detail.fundid,
+          },
+        })
+        .then((response) => {
+          if (response.data.status == 200) {
+            this.$store.commit("removeStoredFund", this.detail.fundid);
+            this.$toast.success(response.data.msg);
+          } else this.$toast.fail(response.data.msg);
+        });
+    },
+  },
+  created() {
     this.$ajax
       .get("fundtypemsg/fundmsg", {
         params: {
-          name: this.$route.params.disease
+          fundid: this.$route.params.fundid,
+        },
+      })
+      .then((response) => {
+        if (response.data.status == 200) {
+          this.detail = response.data.msg;
         }
       })
-      .then(response => {
-        for (let i = 0; i < response.data.length; i++) {
-          if (response.data[i].name === this.$route.params.fund) {
-            this.detail = response.data[i];
-            break;
-          }
-        }
-      })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
-  }
+  },
 };
 </script>
 

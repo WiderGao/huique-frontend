@@ -1,5 +1,5 @@
 <template>
-  <div class="activity-detail-wrap">
+  <div class="activity-detail-wrap" @click="onClick">
     <!-- 这里card原本用于商品展示，currency是货币符号
     currency=""用来隐藏货币符号-->
     <van-card
@@ -29,14 +29,20 @@ export default {
    * essay_url 相关文章
    * img 封面图片
    */
-  props: ["detail"],
+  props: ["detail", "to", "href"],
   components: {
     [Card.name]: Card,
-    [Divider.name]: Divider
+    [Divider.name]: Divider,
   },
   data() {
     return {};
-  }
+  },
+  methods: {
+    onClick() {
+      if (this.to) this.$router.push(this.to);
+      if (this.href) window.open(this.href, "_blank");
+    },
+  },
 };
 </script>
 
@@ -47,5 +53,17 @@ export default {
 .van-card__price-integer {
   font-size: 14px;
   font-weight: bold;
+}
+.van-card__thumb {
+  width: 140px;
+  height: 96px;
+}
+.van-card__title {
+  font-size: 16px;
+  line-height: 1.6;
+}
+.van-card__desc {
+  font-size: 14px;
+  line-height: 1.6;
 }
 </style>

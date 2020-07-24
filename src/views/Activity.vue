@@ -13,6 +13,7 @@
           v-for="item in activities.singingUp"
           :key="item.activityid"
           :detail="item"
+          :to="'/activity/'+item.activityid"
         ></activity-item>
       </van-tab>
       <van-tab title="进行中">
@@ -22,6 +23,7 @@
           v-for="item in activities.processing"
           :key="item.activityid"
           :detail="item"
+          :to="'/activity/'+item.activityid"
         ></activity-item>
       </van-tab>
       <van-tab title="已结束">
@@ -31,6 +33,7 @@
           v-for="item in activities.finished"
           :key="item.activityid"
           :detail="item"
+          :href="item.essay_url"
         ></activity-item>
       </van-tab>
     </van-tabs>
@@ -45,7 +48,7 @@ export default {
     return {
       swipeImg: [], //轮播图片
       activeTab: 0, //激活的标签页
-      activities: { singingUp: [], processing: [], finished: [] } //活动列表
+      activities: { singingUp: [], processing: [], finished: [] }, //活动列表
     };
   },
   components: {
@@ -55,7 +58,7 @@ export default {
     [Tab.name]: Tab,
     [Tabs.name]: Tabs,
     [Empty.name]: Empty,
-    "activity-item": ActivityItem
+    "activity-item": ActivityItem,
   },
   methods: {
     isSingingUp(deadline) {
@@ -73,49 +76,39 @@ export default {
       let end = new Date(endtime),
         now = new Date();
       return now > end;
-    }
+    },
   },
   mounted() {
     //获取轮播图片
     this.$ajax
       .get("utils/generate_carousel_figure_url")
-      .then(response => {
+      .then((response) => {
         this.swipeImg = response.data;
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
     this.$ajax
       .get("activitymsg")
-      .then(response => {
-        this.activities.singingUp = response.data.filter(item =>
-          this.isSingingUp(item.deadline)
-        );
-        this.activities.processing = response.data.filter(item =>
-          this.isProcessing(item.starttime, item.endtime)
-        );
-        this.activities.finished = response.data.filter(item =>
-          this.isFinished(item.endtime)
-        );
+      .then((response) => {
+        if (response.data.status == 200) {
+          this.activities.singingUp = response.data.msg.filter((item) =>
+            this.isSingingUp(item.deadline)
+          );
+          this.activities.processing = response.data.msg.filter((item) =>
+            this.isProcessing(item.starttime, item.endtime)
+          );
+          this.activities.finished = response.data.msg.filter((item) =>
+            this.isFinished(item.endtime)
+          );
+        }
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
-  }
+  },
 };
 </script>
 
 <style scoped>
-#activity-wrap >>> .van-card__thumb {
-  width: 140px;
-  height: 96px;
-}
-#activity-wrap >>> .van-card__title {
-  font-size: 16px;
-  line-height: 1.6;
-}
-#activity-wrap >>> .van-card__desc {
-  font-size: 14px;
-  line-height: 1.6;
-}
 </style>
