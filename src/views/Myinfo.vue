@@ -79,9 +79,9 @@ export default {
   methods: {
     handleSubmit() {
       api.User.changeUserInfo(
-        phone,
-        name,
-        address,
+        this.phone,
+        this.name,
+        this.address,
         this.$store.state.fund_applicant_detail,
         this.$store.state.activity_volunteer_detail
       )
