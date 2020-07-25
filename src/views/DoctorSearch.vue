@@ -35,7 +35,7 @@
 
 <script>
 import { Cell, CellGroup, Search } from "vant";
-
+import api from "../api";
 export default {
   components: {
     [Cell.name]: Cell,
@@ -49,11 +49,10 @@ export default {
       showList: [],
     };
   },
-  mounted() {
-    this.$ajax
-      .get("sectionmsg")
-      .then((response) => {
-        if (response.data.status == 200) this.sectionList = response.data.msg;
+  created() {
+    api.Doctor.getSection()
+      .then((data) => {
+        this.sectionList = data;
         this.showList = this.sectionList;
       })
       .catch((error) => {
@@ -66,12 +65,9 @@ export default {
         this.onClear();
         return;
       }
-      this.$ajax
-        .get("search/expert", {
-          params: { keyword: text },
-        })
-        .then((response) => {
-          if (response.data.status == 200) this.showList = response.data.msg;
+      api.Doctor.searchDoctorBySection(text)
+        .then((data) => {
+          this.showList = data;
         })
         .catch((error) => {
           console.log(error);

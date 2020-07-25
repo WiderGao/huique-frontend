@@ -43,6 +43,8 @@
 <script>
 import { Swipe, SwipeItem, Image, Tab, Tabs, Empty } from "vant";
 import ActivityItem from "@/components/ActivityItem.vue";
+import api from "../api";
+
 export default {
   data() {
     return {
@@ -80,28 +82,25 @@ export default {
   },
   mounted() {
     //获取轮播图片
-    this.$ajax
-      .get("utils/generate_carousel_figure_url")
-      .then((response) => {
-        this.swipeImg = response.data;
+    api.Activity.getCarousel()
+      .then((data) => {
+        this.swipeImg = data;
       })
       .catch((error) => {
         console.log(error);
       });
-    this.$ajax
-      .get("activitymsg")
-      .then((response) => {
-        if (response.data.status == 200) {
-          this.activities.singingUp = response.data.msg.filter((item) =>
-            this.isSingingUp(item.deadline)
-          );
-          this.activities.processing = response.data.msg.filter((item) =>
-            this.isProcessing(item.starttime, item.endtime)
-          );
-          this.activities.finished = response.data.msg.filter((item) =>
-            this.isFinished(item.endtime)
-          );
-        }
+
+    api.Activity.getAllActivity()
+      .then((data) => {
+        this.activities.singingUp = data.filter((item) =>
+          this.isSingingUp(item.deadline)
+        );
+        this.activities.processing = data.filter((item) =>
+          this.isProcessing(item.starttime, item.endtime)
+        );
+        this.activities.finished = data.filter((item) =>
+          this.isFinished(item.endtime)
+        );
       })
       .catch((error) => {
         console.log(error);

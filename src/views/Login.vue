@@ -33,7 +33,7 @@
 
 <script>
 import { Form, Field, Button, Toast } from "vant";
-
+import api from "../api";
 export default {
   components: {
     [Field.name]: Field,
@@ -49,59 +49,13 @@ export default {
   },
   methods: {
     onSubmit(values) {
-      this.$ajax
-        .post("login", {
-          phone: values.phone,
-          password: values.password,
-        })
-        .then((response) => {
-          if (response.data.status == 200) {
-            this.$ajax
-              .get("/usermsg")
-              .then((response) => {
-                // console.log(response.data);
-                this.$store.commit("saveUserName", response.data.msg.username);
-                this.$store.commit("savePhone", response.data.msg.phone);
-                this.$store.commit("saveAddress", response.data.msg.address);
-                this.$store.commit(
-                  "saveFundApplicantDetail",
-                  response.data.msg.fund_applicant_detail
-                );
-                this.$store.commit(
-                  "saveActivityVolunteerDetail",
-                  response.data.msg.activity_volunteer_detail
-                );
-              })
-              .catch((error) => {
-                throw error;
-              });
-            this.$ajax
-              .get("/activitymsg/joinedactivity")
-              .then((response) => {
-                this.$store.commit("saveJoinedActivity", response.data.msg);
-              })
-              .catch((error) => {
-                throw error;
-              });
-            this.$ajax
-              .get("/fundtypemsg/fundmsg/storedfund")
-              .then((response) => {
-                this.$store.commit("saveStoredFund", response.data.msg);
-              })
-              .catch((error) => {
-                throw error;
-              });
-            this.$cookies.set("logged", "true", "14d");
-            this.$toast.success(response.data.msg);
-            this.$router.push({ name: "Home" });
-          } else {
-            this.$toast.fail(response.data.msg);
-          }
+      api.User.login(values.phone, values.password)
+        .then((data) => {
+          this.$toast.success(data);
+          this.$router.push({ name: "Home" });
         })
         .catch((error) => {
-          //清除用户登录信息
-          this.$store.dispatch("clearLogin");
-          this.$cookies.remove("logged");
+          this.$toast.fail(error.message);
           console.log(error);
         });
     },

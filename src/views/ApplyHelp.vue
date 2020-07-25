@@ -38,6 +38,7 @@
 
 <script>
 import { CellGroup, Field, Toast, Button } from "vant";
+import api from "../api";
 export default {
   components: {
     [CellGroup.name]: CellGroup,
@@ -54,19 +55,19 @@ export default {
   },
   methods: {
     handleSubmit() {
-      this.$ajax
-        .get("/usermsg/updatemsg", {
-          params: {
-            phone: this.$store.state.phone,
-            username: this.$store.state.username,
-            address: this.$store.state.address,
-            fund_applicant_detail: this.$store.state.fund_applicant_detail,
-            activity_volunteer_detail: this.$store.state
-              .activity_volunteer_detail,
-          },
+      api.User.changeUserInfo(
+        this.phone,
+        this.username,
+        this.$store.state.address,
+        this.details,
+        this.$store.state.activity_volunteer_detail
+      )
+        .then((data) => {
+          this.$toast.success("提交成功");
         })
-        .then((response) => {
-          if (response.data.status == 200) this.$toast.success("提交成功");
+        .catch((error) => {
+          this.$toast.fail("请重试");
+          console.log(error);
         });
     },
   },

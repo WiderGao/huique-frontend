@@ -16,6 +16,7 @@
 
 <script>
 import { Cell, CellGroup } from "vant";
+import api from "../api";
 export default {
   components: {
     [Cell.name]: Cell,
@@ -27,14 +28,9 @@ export default {
     };
   },
   created() {
-    this.$ajax
-      .get("fundtypemsg/fundmsg", {
-        params: {
-          name: this.$route.params.disease,
-        },
-      })
-      .then((response) => {
-        this.fundList = response.data.msg;
+    api.Fund.getClassifiedFund(this.$route.params.disease)
+      .then((data) => {
+        this.fundList = data;
       })
       .catch((error) => {
         console.log(error);

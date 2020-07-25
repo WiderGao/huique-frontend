@@ -32,7 +32,7 @@
 
 <script>
 import { Cell, CellGroup, Image, Button, Toast } from "vant";
-
+import api from "../api";
 export default {
   components: {
     [Cell.name]: Cell,
@@ -49,46 +49,33 @@ export default {
   methods: {
     //收藏
     handleStore() {
-      this.$ajax
-        .get("/fundtypemsg/fundmsg/storefund", {
-          params: {
-            fundid: this.detail.fundid,
-          },
+      api.Fund.storeFund(this.detail.fundid)
+        .then((data) => {
+          this.$store.commit("addStoredFund", this.detail);
+          this.$toast.success(data);
         })
-        .then((response) => {
-          if (response.data.status == 200) {
-            this.$store.commit("addStoredFund", this.detail);
-            this.$toast.success(response.data.msg);
-          } else this.$toast.fail(response.data.msg);
+        .catch((error) => {
+          this.$toast.fail(error.message);
+          console.log(error);
         });
     },
     //取消收藏
     handleCancel() {
-      this.$ajax
-        .get("/fundtypemsg/fundmsg/cancelfund", {
-          params: {
-            fundid: this.detail.fundid,
-          },
+      api.Fund.dropFund(this.detail.fundid)
+        .then((data) => {
+          this.$store.commit("removeStoredFund", this.detail.fundid);
+          this.$toast.success(data);
         })
-        .then((response) => {
-          if (response.data.status == 200) {
-            this.$store.commit("removeStoredFund", this.detail.fundid);
-            this.$toast.success(response.data.msg);
-          } else this.$toast.fail(response.data.msg);
+        .catch((error) => {
+          this.$toast.fail(error.message);
+          console.log(error);
         });
     },
   },
   created() {
-    this.$ajax
-      .get("fundtypemsg/fundmsg", {
-        params: {
-          fundid: this.$route.params.fundid,
-        },
-      })
-      .then((response) => {
-        if (response.data.status == 200) {
-          this.detail = response.data.msg;
-        }
+    api.Fund.getOneFund(this.$route.params.fundid)
+      .then((data) => {
+        this.detail = data;
       })
       .catch((error) => {
         console.log(error);

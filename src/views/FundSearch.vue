@@ -75,6 +75,7 @@
 
 <script>
 import { Cell, CellGroup, Image, Search, Tab, Tabs } from "vant";
+import api from "../api";
 export default {
   components: {
     [Cell.name]: Cell,
@@ -98,15 +99,11 @@ export default {
         this.onClear();
         return;
       }
-      this.$ajax
-        .get("search/fundtype", {
-          params: { keyword: text },
-        })
-        .then((response) => {
-          if (response.data.status == 200)
-            this.showList = this.fundType.filter((item) =>
-              response.data.msg.includes(item.name)
-            );
+      api.Fund.searchFundType(text)
+        .then((data) => {
+          this.showList = this.fundType.filter((item) =>
+            data.includes(item.name)
+          );
         })
         .catch((error) => {
           console.log(error);
@@ -122,12 +119,14 @@ export default {
     },
   },
   created() {
-    this.$ajax.get("fundtypemsg").then((response) => {
-      if (response.data.status == 200) {
-        this.fundType = response.data.msg;
+    api.Fund.getFundType()
+      .then((data) => {
+        this.fundType = data;
         this.showList = this.fundType;
-      }
-    });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 </script>

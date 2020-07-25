@@ -2,28 +2,19 @@
 
 <script>
 import { Toast } from "vant";
-
+import api from "../api";
 export default {
   components: {
     [Toast.name]: Toast,
   },
   created() {
-    this.$ajax
-      .post("logout")
-      .then((response) => {
-        if (response.data.status == 200) {
-          //清除用户登录信息
-          this.$store.dispatch("clearLogin");
-          this.$cookies.remove("logged");
-
-          //提示
-          this.$toast.success(response.data.msg);
-          this.$router.push({ name: "Home" });
-        } else {
-          this.$toast.fail(response.data.msg);
-        }
+    api.User.logout()
+      .then((data) => {
+        this.$toast.success(data);
+        this.$router.push({ name: "Home" });
       })
       .catch((error) => {
+        this.$toast.fail(error.message);
         console.log(error);
       });
   },

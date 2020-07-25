@@ -16,6 +16,7 @@
 
 <script>
 import { Cell, CellGroup } from "vant";
+import api from "../api";
 export default {
   components: {
     [Cell.name]: Cell,
@@ -27,9 +28,13 @@ export default {
     };
   },
   created() {
-    this.$ajax.get("/fundtypemsg/fundmsg/storedfund").then((response) => {
-      if (response.data.status == 200) this.fund = response.data.msg;
-    });
+    api.Fund.getStoredFund()
+      .then((data) => {
+        this.fund = data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 </script>

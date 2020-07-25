@@ -58,6 +58,7 @@
 
 <script>
 import { Form, Field, Toast, Button } from "vant";
+import api from "../api";
 export default {
   components: {
     [Form.name]: Form,
@@ -77,34 +78,29 @@ export default {
   },
   methods: {
     handleSubmit() {
-      this.$ajax
-        .get("/usermsg/updatemsg", {
-          params: {
-            phone: this.$store.state.phone,
-            username: this.$store.state.username,
-            address: this.$store.state.address,
-            fund_applicant_detail: this.$store.state.fund_applicant_detail,
-            activity_volunteer_detail: this.$store.state
-              .activity_volunteer_detail,
-          },
+      api.User.changeUserInfo(
+        phone,
+        name,
+        address,
+        this.$store.state.fund_applicant_detail,
+        this.$store.state.activity_volunteer_detail
+      )
+        .then((data) => {
+          this.$toast.success(data);
         })
-        .then((response) => {
-          if (response.data.status == 200)
-            this.$toast.success(response.data.msg);
+        .catch((error) => {
+          this.$toast.fail(error.message);
+          console.log(error);
         });
     },
     handleChangePass() {
-      this.$ajax
-        .get("/usermsg/changepass", {
-          params: {
-            oldPassword: this.oldPassword,
-            newPassword: this.newPassword,
-          },
+      api.User.changePass(this.oldPassword, this.newPassword)
+        .then((data) => {
+          this.$toast.success(data);
         })
-        .then((response) => {
-          if (response.data.status == 200)
-            this.$toast.success(response.data.msg);
-          else this.$toast.fail(response.data.msg);
+        .catch((error) => {
+          this.$toast.fail(error.message);
+          console.log(error);
         });
     },
     validatePassLength(values) {

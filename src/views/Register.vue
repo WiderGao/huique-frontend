@@ -53,7 +53,7 @@
 
 <script>
 import { Form, Field, Button, Toast } from "vant";
-
+import api from "../api";
 export default {
   components: {
     [Field.name]: Field,
@@ -72,21 +72,13 @@ export default {
   methods: {
     onSubmit(values) {
       // console.log("submit", values);
-      this.$ajax
-        .post("register", {
-          phone: values.phone,
-          password: values.password,
-          username: values.username,
-        })
-        .then((response) => {
-          if (response.data.status == 200) {
-            this.$toast.success(response.data.msg);
-            this.$router.push({ name: "Login" });
-          } else {
-            this.$toast.fail(response.data.msg);
-          }
+      api.User.register(values.phone, values.password, values.username)
+        .then((data) => {
+          this.$toast.success(data);
+          this.$router.push({ name: "Login" });
         })
         .catch((error) => {
+          this.$toast.fail(error.message);
           console.log(error);
         });
     },

@@ -11,6 +11,7 @@
 
 <script>
 import ActivityItem from "@/components/ActivityItem.vue";
+import api from "../api";
 export default {
   components: {
     "activity-item": ActivityItem,
@@ -21,9 +22,13 @@ export default {
     };
   },
   created() {
-    this.$ajax.get("/activitymsg/joinedactivity").then((response) => {
-      if (response.data.status == 200) this.activity = response.data.msg;
-    });
+    api.Activity.getJoinedActivity()
+      .then((data) => {
+        this.activity = data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 </script>

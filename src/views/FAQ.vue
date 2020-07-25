@@ -11,7 +11,7 @@
 
 <script>
 import { Cell, CellGroup, Button } from "vant";
-
+import api from "../api";
 export default {
   components: {
     [Cell.name]: Cell,
@@ -27,10 +27,8 @@ export default {
     handleFeedback() {},
   },
   created() {
-    this.$ajax.get("/helpmsg").then((response) => {
-      if (response.data.status == 200) {
-        this.faq = response.data.msg;
-      }
+    api.Common.getHelp().then((data) => {
+      this.faq = data;
     });
   },
 };

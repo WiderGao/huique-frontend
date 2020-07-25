@@ -31,6 +31,8 @@
 
 <script>
 import { Cell, CellGroup, Image, Button, Toast } from "vant";
+import api from "../api";
+
 export default {
   components: {
     [Cell.name]: Cell,
@@ -47,44 +49,33 @@ export default {
   methods: {
     //报名
     handleEnroll() {
-      this.$ajax
-        .get("/activitymsg/joinactivity", {
-          params: {
-            activityid: this.detail.activityid,
-          },
+      api.Activity.joinActivity(this.detail.activityid)
+        .then((data) => {
+          this.$store.commit("addJoinedActivity", this.detail);
+          this.$toast.success(data);
         })
-        .then((response) => {
-          if (response.data.status == 200) {
-            this.$store.commit("addJoinedActivity", this.detail);
-            this.$toast.success(response.data.msg);
-          } else this.$toast.fail(response.data.msg);
+        .catch((error) => {
+          this.$toast.fail(error.message);
+          console.log(error);
         });
     },
     //取消报名
     handleCancel() {
-      this.$ajax
-        .get("/activitymsg/cancelactivity", {
-          params: {
-            activityid: this.detail.activityid,
-          },
+      api.Activity.exitActivity(this.detail.activityid)
+        .then((data) => {
+          this.$store.commit("removeJoinedActivity", this.detail.activityid);
+          this.$toast.success(data);
         })
-        .then((response) => {
-          if (response.data.status == 200) {
-            this.$store.commit("removeJoinedActivity", this.detail.activityid);
-            this.$toast.success(response.data.msg);
-          } else this.$toast.fail(response.data.msg);
+        .catch((error) => {
+          this.$toast.fail(error.message);
+          console.log(error);
         });
     },
   },
   created() {
-    this.$ajax
-      .get("activitymsg", {
-        params: {
-          activityid: this.$route.params.activityid,
-        },
-      })
-      .then((response) => {
-        if (response.data.status == 200) this.detail = response.data.msg;
+    api.Activity.getOneActivity(this.$route.params.activityid)
+      .then((data) => {
+        this.detail = data;
       })
       .catch((error) => {
         console.log(error);

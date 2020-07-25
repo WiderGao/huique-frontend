@@ -14,6 +14,8 @@
 
 <script>
 import { Cell, CellGroup } from "vant";
+import api from "../api";
+
 export default {
   components: {
     [Cell.name]: Cell,
@@ -25,14 +27,9 @@ export default {
     };
   },
   mounted() {
-    this.$ajax
-      .get("sectionmsg/expert", {
-        params: {
-          section: this.$route.params.section,
-        },
-      })
-      .then((response) => {
-        if (response.data.status == 200) this.doctorList = response.data.msg;
+    api.Doctor.getDoctor(this.$route.params.section)
+      .then((data) => {
+        this.doctorList = data;
       })
       .catch((error) => {
         console.log(error);

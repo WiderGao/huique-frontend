@@ -14,7 +14,7 @@
 
 <script>
 import { Cell, CellGroup, Button } from "vant";
-
+import api from "../api";
 export default {
   components: {
     [Cell.name]: Cell,
@@ -32,17 +32,21 @@ export default {
     handleFeedback() {},
   },
   created() {
-    this.$ajax.get("/aboutus/huiquemsg").then((response) => {
-      if (response.data.status == 200) {
-        this.feature = response.data.msg[0].msg1;
-        this.huique = response.data.msg[1].msg1;
-      }
-    });
-    this.$ajax.get("/aboutus/authormsg").then((response) => {
-      if (response.data.status == 200) {
-        this.author = response.data.msg;
-      }
-    });
+    api.Common.getAppInfo()
+      .then((data) => {
+        this.feature = data[0].msg1;
+        this.huique = data[1].msg1;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    api.Common.getAuthor()
+      .then((data) => {
+        this.author = data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 </script>
