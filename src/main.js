@@ -5,6 +5,9 @@ import qs from 'qs'
 
 import router from './router'
 import store from './store'
+
+import VueCookies from 'vue-cookies'
+Vue.use(VueCookies)
 import "vue-awesome/icons";
 
 axios.defaults.baseURL = "http://127.0.0.1:3000";

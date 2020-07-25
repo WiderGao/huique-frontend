@@ -2,6 +2,7 @@
   <div id="profile-wrap">
     <div class="user-info">
       <van-image
+        v-if="$store.state.phone!=null"
         class="avatar"
         round
         width="6.5rem"
@@ -17,6 +18,13 @@
           round
           to="/login"
         >登录</van-button>
+        <van-button
+          v-if="$store.state.username==null"
+          type="primary"
+          size="large"
+          round
+          to="/register"
+        >注册</van-button>
       </div>
     </div>
     <van-cell-group>
@@ -53,6 +61,10 @@ export default {
   padding: 18px;
   width: 100%;
   background-color: #1989fa;
+  height: 170px;
+}
+.userpanel .van-button {
+  margin: 10px;
 }
 .userpanel {
   display: flex;

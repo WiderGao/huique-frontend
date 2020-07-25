@@ -49,7 +49,6 @@ export default {
   },
   methods: {
     onSubmit(values) {
-      console.log("submit", values);
       this.$ajax
         .post("login", {
           phone: values.phone,
@@ -60,7 +59,7 @@ export default {
             this.$ajax
               .get("/usermsg")
               .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 this.$store.commit("saveUserName", response.data.msg.username);
                 this.$store.commit("savePhone", response.data.msg.phone);
                 this.$store.commit("saveAddress", response.data.msg.address);
@@ -92,6 +91,7 @@ export default {
               .catch((error) => {
                 throw error;
               });
+            this.$cookies.set("logged", "true", "14d");
             this.$toast.success(response.data.msg);
             this.$router.push({ name: "Home" });
           } else {
@@ -100,7 +100,8 @@ export default {
         })
         .catch((error) => {
           //清除用户登录信息
-          this.$dispatch("clearLogin");
+          this.$store.dispatch("clearLogin");
+          this.$cookies.remove("logged");
           console.log(error);
         });
     },

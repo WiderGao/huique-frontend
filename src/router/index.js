@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
+import axios from 'axios'
 
 import HomePage from '@/views/Activity.vue'
 import ActivityDetail from '@/views/ActivityDetail.vue'
@@ -217,19 +218,61 @@ router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = "灰雀 · " + to.meta.title;
   }
+
   // 针对登录才能访问的页面
-  if (to.meta.requireAuth && store.state.phone == null) {
+  if (store.state.phone == null && to.meta.requireAuth) {
+    console.log(to)
     Toast.fail('请先登录');
     next({
       name: 'Login'
     })
   }
-  // 针对已登录且缓存到本地
-  else if (to.name == 'Login' && store.state.phone != null) {
+  // 针对已登录且访问登录页面
+  else if (store.state.phone != null && to.name == 'Login') {
     next({
       name: 'Home'
     })
   }
+  //用保存的cookie判断是否已经登录
+  else if (Vue.$cookies.get("logged") == "true" && store.state.phone == null) {
+    axios.get("/usermsg")
+      .then((response) => {
+        store.commit("saveUserName", response.data.msg.username);
+        store.commit("savePhone", response.data.msg.phone);
+        store.commit("saveAddress", response.data.msg.address);
+        store.commit(
+          "saveFundApplicantDetail",
+          response.data.msg.fund_applicant_detail
+        );
+        store.commit(
+          "saveActivityVolunteerDetail",
+          response.data.msg.activity_volunteer_detail
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    axios
+      .get("/activitymsg/joinedactivity")
+      .then((response) => {
+        store.commit("saveJoinedActivity", response.data.msg);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    axios
+      .get("/fundtypemsg/fundmsg/storedfund")
+      .then((response) => {
+        store.commit("saveStoredFund", response.data.msg);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    next();
+  }
   else next();
+})
+router.onError((error) => {
+  console.log(error)
 })
 export default router
