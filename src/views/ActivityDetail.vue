@@ -17,13 +17,7 @@
       <van-cell title="备注" :label="detail.remark" clickable center></van-cell>
     </van-cell-group>
     <div style="margin: 16px;" v-if="new Date(detail.deadline)>=new Date()">
-      <van-button
-        v-if="$store.state.joinedActivity.map(item => item.activityid).includes(detail.activityid)"
-        round
-        block
-        type="info"
-        @click="handleCancel"
-      >取消报名</van-button>
+      <van-button v-if="joined" round block type="info" @click="handleCancel">取消报名</van-button>
       <van-button v-else round block type="info" @click="handleEnroll">报名</van-button>
     </div>
   </div>
@@ -45,6 +39,13 @@ export default {
     return {
       detail: {},
     };
+  },
+  computed: {
+    joined() {
+      return this.$store.state.joinedActivity
+        .map((item) => item.activityid)
+        .includes(this.detail.activityid);
+    },
   },
   methods: {
     //报名

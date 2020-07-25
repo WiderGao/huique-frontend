@@ -18,13 +18,7 @@
       <van-cell title="申请表下载" :url="detail.form" is-link center></van-cell>
     </van-cell-group>
     <div style="margin: 16px;">
-      <van-button
-        v-if="$store.state.storedFund.map(item => item.fundid).includes(detail.fundid)"
-        round
-        block
-        type="info"
-        @click="handleCancel"
-      >取消收藏</van-button>
+      <van-button v-if="stored" round block type="info" @click="handleCancel">取消收藏</van-button>
       <van-button v-else round block type="info" @click="handleStore">收藏</van-button>
     </div>
   </div>
@@ -45,6 +39,13 @@ export default {
     return {
       detail: {},
     };
+  },
+  computed: {
+    stored() {
+      return this.$store.state.storedFund
+        .map((item) => item.fundid)
+        .includes(this.detail.fundid);
+    },
   },
   methods: {
     //收藏

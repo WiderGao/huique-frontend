@@ -23,6 +23,9 @@ import MyFund from '@/views/MyFund.vue'
 import FAQ from '@/views/FAQ.vue'
 import About from '@/views/About.vue'
 
+
+import api from '../api'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -219,9 +222,17 @@ router.beforeEach((to, from, next) => {
     document.title = "灰雀 · " + to.meta.title;
   }
 
+  //用保存的cookie判断是否已经登录
+  //这个要在判断登录逻辑之前
+  if (Vue.$cookies.get("logged") == "true" && store.state.phone == null) {
+    api.User.getUserInfo();
+    api.Activity.getJoinedActivity();
+    api.Fund.getStoredFund();
+    next();
+  }
   // 针对登录才能访问的页面
-  if (store.state.phone == null && to.meta.requireAuth) {
-    console.log(to)
+  else if (store.state.phone == null && to.meta.requireAuth) {
+    // console.log(to)
     Toast.fail('请先登录');
     next({
       name: 'Login'
@@ -232,43 +243,6 @@ router.beforeEach((to, from, next) => {
     next({
       name: 'Home'
     })
-  }
-  //用保存的cookie判断是否已经登录
-  else if (Vue.$cookies.get("logged") == "true" && store.state.phone == null) {
-    axios.get("/usermsg")
-      .then((response) => {
-        store.commit("saveUserName", response.data.msg.username);
-        store.commit("savePhone", response.data.msg.phone);
-        store.commit("saveAddress", response.data.msg.address);
-        store.commit(
-          "saveFundApplicantDetail",
-          response.data.msg.fund_applicant_detail
-        );
-        store.commit(
-          "saveActivityVolunteerDetail",
-          response.data.msg.activity_volunteer_detail
-        );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    axios
-      .get("/activitymsg/joinedactivity")
-      .then((response) => {
-        store.commit("saveJoinedActivity", response.data.msg);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    axios
-      .get("/fundtypemsg/fundmsg/storedfund")
-      .then((response) => {
-        store.commit("saveStoredFund", response.data.msg);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    next();
   }
   else next();
 })
