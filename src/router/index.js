@@ -230,10 +230,15 @@ router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = "灰雀 · " + to.meta.title;
   }
-
+  // 针对已登录且访问登录页面
+  if (Vue.$cookies.get("logged") == "true" && to.name == 'Login') {
+    next({
+      name: 'Home'
+    })
+  }
   //用保存的cookie判断是否已经登录
-  //这个要在判断登录逻辑之前
-  if (Vue.$cookies.get("logged") == "true" && store.state.phone == null) {
+  //这个要在判断页面访问权限之前
+  else if (Vue.$cookies.get("logged") == "true" && store.state.phone == null) {
     Promise.all(
       [
         api.User.getUserInfo(),
@@ -254,12 +259,6 @@ router.beforeEach((to, from, next) => {
     Toast.fail('请先登录');
     next({
       name: 'Login'
-    })
-  }
-  // 针对已登录且访问登录页面
-  else if (store.state.phone != null && to.name == 'Login') {
-    next({
-      name: 'Home'
     })
   }
   else next();

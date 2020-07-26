@@ -1,0 +1,10 @@
+@import "./base";
+.van-tabbar {
+  background-color: $main-color2;
+  .van-tabbar-item {
+    color: $grey-color3;
+  }
+  .van-tabbar-item--active {
+    color: white;
+  }
+}

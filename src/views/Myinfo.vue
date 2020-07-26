@@ -68,13 +68,36 @@ export default {
   },
   data() {
     return {
-      name: this.$store.state.username,
-      phone: this.$store.state.phone,
-      address: this.$store.state.address,
       oldPassword: "",
       newPassword: "",
       checkPassword: "",
     };
+  },
+  computed: {
+    name: {
+      get() {
+        return this.$store.state.username;
+      },
+      set(val) {
+        this.$store.commit("saveUserName", val);
+      },
+    },
+    phone: {
+      get() {
+        return this.$store.state.phone;
+      },
+      set(val) {
+        this.$store.commit("savePhone", val);
+      },
+    },
+    address: {
+      get() {
+        return this.$store.state.address;
+      },
+      set(val) {
+        this.$store.commit("saveAddress", val);
+      },
+    },
   },
   methods: {
     handleSubmit() {

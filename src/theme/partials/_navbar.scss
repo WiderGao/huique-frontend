@@ -1,0 +1,10 @@
+@import "./base";
+
+.van-nav-bar {
+  background-color: $main-color1;
+  .van-nav-bar__left *,
+  .van-nav-bar__right *,
+  .van-nav-bar__title {
+    color: $main-color2;
+  }
+}

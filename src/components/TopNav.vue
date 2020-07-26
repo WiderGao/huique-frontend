@@ -6,10 +6,24 @@
       @click-left="pageBack"
       @click-right="showSharePanel"
     >
-      <template #left v-if="$route.name!='Home'&&$route.name!='Info'&&$route.name!='Profile'">
-        <v-icon name="chevron-left" color="#1989fa" scale="1.25"></v-icon>
-        <div></div>
+      <template #left>
+        <v-icon
+          v-if="$route.name!='Home'&&$route.name!='Info'&&$route.name!='Profile'"
+          name="chevron-left"
+          color="#1989fa"
+          scale="1.25"
+        ></v-icon>
+        <van-image
+          v-else
+          :src="require('@/assets/img/icon.png')"
+          height="32"
+          width="32"
+          fit="contain"
+        ></van-image>
       </template>
+      <!-- <template #title>
+        <van-image :src="require('@/assets/img/header.png')" fit="scale-down" height="46"></van-image>
+      </template>-->
       <template #right>
         <v-icon name="share-alt" color="#1989fa" scale="1.15"></v-icon>
       </template>
@@ -20,12 +34,13 @@
 
 <script>
 import Vicon from "vue-awesome/components/Icon";
-import { NavBar, Icon, ShareSheet } from "vant";
+import { NavBar, Icon, ShareSheet, Image } from "vant";
 export default {
   components: {
     [NavBar.name]: NavBar,
     [Icon.name]: Icon,
     [ShareSheet.name]: ShareSheet,
+    [Image.name]: Image,
     "v-icon": Vicon,
   },
   data() {

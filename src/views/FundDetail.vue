@@ -3,7 +3,7 @@
     <van-cell-group>
       <van-cell>
         <template #title>
-          <h2>{{detail.name}}</h2>
+          <div class="title">{{detail.name}}</div>
         </template>
       </van-cell>
       <van-cell title="备案号" :label="detail.record_num" clickable center></van-cell>

@@ -1,0 +1,12 @@
+@import "./base";
+.van-swipe__indicator {
+  width: 8px;
+  height: 8px;
+  opacity: 1;
+  background-color: rgb(255, 255, 255, 0.3);
+  box-sizing: content-box;
+  border: 2px solid white;
+}
+.van-swipe__indicator--active {
+  background-color: $sub-color;
+}

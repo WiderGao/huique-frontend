@@ -1,0 +1,22 @@
+@import "./base";
+.van-tabs__nav {
+  background-color: $main-color2;
+  .van-tab {
+    color: white;
+    border-radius: 10px 9px 0 0;
+    margin: 3px 3px 0 3px;
+  }
+  .van-tab--active {
+    color: $grey-color1;
+    background-color: white;
+    box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.25);
+  }
+  .van-tabs__line {
+    background-color: $sub-color;
+  }
+}
+.van-tabs__content {
+  .van-divider {
+    border-color: $grey-color3;
+  }
+}

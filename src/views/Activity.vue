@@ -1,6 +1,6 @@
 <template>
-  <div id="activity-wrap">
-    <van-swipe :autoplay="3000">
+  <div class="activity-wrap">
+    <van-swipe :autoplay="3000" height="250">
       <van-swipe-item v-for="(image, index) in swipeImg" :key="index">
         <van-image :src="image" fit="cover" height="250"></van-image>
       </van-swipe-item>
@@ -110,4 +110,19 @@ export default {
 </script>
 
 <style scoped>
+.activity-wrap {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.activity-wrap >>> .van-tabs {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.activity-wrap >>> .van-tabs__content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="fund-wrap">
+  <div class="fund-wrap">
     <van-tabs v-model="activeTab" sticky swipeable animated>
       <van-tab title="基金信息">
         <!-- 在 van-search 外层增加 form 标签，且 action 不为空，即可在输入法中显示搜索按钮。 -->
@@ -132,11 +132,27 @@ export default {
 </script>
 
 <style scoped>
+.fund-wrap {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.van-tabs {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.fund-wrap >>> .van-tabs__content {
+  flex-grow: 1;
+}
 .search-info-desc {
   padding: 4px 16px;
   font-size: 12px;
   color: #969799;
   background-color: #fff;
   width: 100%;
+}
+.fund-wrap >>> .van-tabs__wrap {
+  height: 46px;
 }
 </style>

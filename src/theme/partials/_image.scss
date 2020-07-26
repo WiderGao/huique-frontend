@@ -1,0 +1,20 @@
+@import "./base";
+.activity-detail-wrap {
+  .van-cell-group {
+    .van-cell {
+      .van-cell__title {
+        .title {
+          padding: 10px;
+          font-size: 1.6em;
+          font-weight: bold;
+          text-align: center;
+        }
+      }
+    }
+  }
+  .van-image {
+    border-radius: 1em;
+    height: 200px;
+    overflow: hidden;
+  }
+}

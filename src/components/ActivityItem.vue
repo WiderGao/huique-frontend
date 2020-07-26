@@ -4,17 +4,27 @@
     currency=""用来隐藏货币符号-->
     <van-card
       currency
-      :price="detail.deadline+'报名截止'"
       :desc="detail.place"
       :title="detail.name"
       :thumb="detail.img"
-    />
-    <van-divider :style="{ borderColor: '#323233', margin: '0' }"></van-divider>
+      :tag="detail.status"
+    >
+      <template #price>
+        <v-icon name="regular/clock" style="margin-right:6px"></v-icon>
+        <span>{{detail.deadline+'报名截止'}}</span>
+      </template>
+      <template #desc>
+        <v-icon name="map-marker-alt" style="margin-right:6px"></v-icon>
+        <span>{{detail.place}}</span>
+      </template>
+    </van-card>
+    <van-divider :style="{ margin: '0' }"></van-divider>
   </div>
 </template>
 
 <script>
 import { Card, Divider } from "vant";
+import Vicon from "vue-awesome/components/Icon";
 
 export default {
   /* details 需要包括：
@@ -33,6 +43,7 @@ export default {
   components: {
     [Card.name]: Card,
     [Divider.name]: Divider,
+    "v-icon": Vicon,
   },
   data() {
     return {};

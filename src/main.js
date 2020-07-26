@@ -9,6 +9,7 @@ import store from './store'
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
 import "vue-awesome/icons";
+import "@/theme/main.scss";
 
 axios.defaults.baseURL = "http://127.0.0.1:3000";
 // axios.defaults.baseURL = "http://api.wider.ink";
@@ -20,7 +21,7 @@ axios.interceptors.request.use(
   config => {
     if (config.method === 'post') {
       if (config.headers['Content-Type'] != 'application/x-www-form-urlencoded') {
-        console.log(config.data)
+        // console.log(config.data)
         config.data = qs.stringify(config.data)
       }
 
