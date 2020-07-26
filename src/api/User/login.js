@@ -11,11 +11,15 @@ export default function login(phone, password) {
         password: password,
     }).then(response => {
         if (response.data.status == 200) {
-            getUserInfo();
-            getJoinedActivity();
-            getStoredFund();
-            Vue.$cookies.set("logged", "true", "14d");
-            return response.data.msg;
+            Promise.all([getUserInfo(), getJoinedActivity(), getStoredFund()]).then(() => {
+                Vue.$cookies.set("logged", "true", "14d");
+                return response.data.msg;
+            }).catch(error => {
+                //错误后清除本地登录信息
+                store.dispatch("clearLogin");
+                Vue.$cookies.remove("logged");
+                throw error;
+            })
         }
         else {
             //错误后清除本地登录信息

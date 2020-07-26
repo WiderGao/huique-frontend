@@ -22,6 +22,7 @@ import MyActivity from '@/views/MyActivity.vue'
 import MyFund from '@/views/MyFund.vue'
 import FAQ from '@/views/FAQ.vue'
 import About from '@/views/About.vue'
+import Page404 from '@/views/404.vue'
 
 
 import api from '../api'
@@ -203,6 +204,14 @@ const routes = [
       title: '关于我们',
       requireAuth: false
     }
+  },
+  {
+    path: '*',
+    component: Page404,
+    meta: {
+      title: '页面未找到',
+      requireAuth: false
+    }
   }
 ]
 
@@ -225,9 +234,18 @@ router.beforeEach((to, from, next) => {
   //用保存的cookie判断是否已经登录
   //这个要在判断登录逻辑之前
   if (Vue.$cookies.get("logged") == "true" && store.state.phone == null) {
-    api.User.getUserInfo();
-    api.Activity.getJoinedActivity();
-    api.Fund.getStoredFund();
+    Promise.all(
+      [
+        api.User.getUserInfo(),
+        api.Activity.getJoinedActivity(),
+        api.Fund.getStoredFund()
+      ]).catch(error => {
+        //获取用户信息失败就清除旧信息
+        store.dispatch("clearLogin");
+        Vue.$cookies.remove("logged");
+        console.log(error);
+      })
+
     next();
   }
   // 针对登录才能访问的页面
