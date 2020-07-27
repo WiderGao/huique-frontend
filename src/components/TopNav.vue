@@ -65,7 +65,12 @@ export default {
   },
   methods: {
     pageBack() {
-      this.$router.go(-1);
+      if (
+        this.$route.name != "Activity" &&
+        this.$route.name != "Info" &&
+        this.$route.name != "Profile"
+      )
+        this.$router.go(-1);
     },
     showSharePanel() {
       this.showShare = true;
