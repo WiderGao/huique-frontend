@@ -3,26 +3,26 @@ import VueRouter from 'vue-router'
 import store from '@/store'
 import axios from 'axios'
 
-import ActivityPage from '@/views/Activity.vue'
-import ActivityDetail from '@/views/ActivityDetail.vue'
-import InfoPage from '@/views/Info.vue'
-import ProfilePage from '@/views/Profile.vue'
-import FundSearch from '@/views/FundSearch.vue'
-import DoctorSearch from '@/views/DoctorSearch.vue'
-import FundType from '@/views/FundType.vue'
-import FundDetail from '@/views/FundDetail.vue'
-import RaiseHelp from '@/views/RaiseHelp.vue'
-import ApplyHelp from '@/views/ApplyHelp.vue'
-import DoctorList from '@/views/DoctorList.vue'
-import Login from '@/views/Login.vue'
-import Logout from '@/views/Logout.vue'
-import Register from '@/views/Register.vue'
-import Myinfo from '@/views/Myinfo.vue'
-import MyActivity from '@/views/MyActivity.vue'
-import MyFund from '@/views/MyFund.vue'
-import FAQ from '@/views/FAQ.vue'
-import About from '@/views/About.vue'
-import Page404 from '@/views/404.vue'
+const ActivityPage = () => import('@/views/Activity.vue')
+const ActivityDetail = () => import('@/views/ActivityDetail.vue')
+const InfoPage = () => import('@/views/Info.vue')
+const ProfilePage = () => import('@/views/Profile.vue')
+const FundSearch = () => import('@/views/FundSearch.vue')
+const DoctorSearch = () => import('@/views/DoctorSearch.vue')
+const FundType = () => import('@/views/FundType.vue')
+const FundDetail = () => import('@/views/FundDetail.vue')
+const RaiseHelp = () => import('@/views/RaiseHelp.vue')
+const ApplyHelp = () => import('@/views/ApplyHelp.vue')
+const DoctorList = () => import('@/views/DoctorList.vue')
+const Login = () => import('@/views/Login.vue')
+const Logout = () => import('@/views/Logout.vue')
+const Register = () => import('@/views/Register.vue')
+const Myinfo = () => import('@/views/Myinfo.vue')
+const MyActivity = () => import('@/views/MyActivity.vue')
+const MyFund = () => import('@/views/MyFund.vue')
+const FAQ = () => import('@/views/FAQ.vue')
+const About = () => import('@/views/About.vue')
+const Page404 = () => import('@/views/404.vue')
 
 
 import api from '../api'

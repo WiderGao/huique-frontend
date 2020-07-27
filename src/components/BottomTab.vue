@@ -19,6 +19,10 @@
 
 <script>
 import Vicon from "vue-awesome/components/Icon";
+import "vue-awesome/icons/home";
+import "vue-awesome/icons/search";
+import "vue-awesome/icons/user";
+import "vue-awesome/icons/regular/user";
 
 import { Tabbar, TabbarItem, Icon } from "vant";
 

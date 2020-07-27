@@ -25,6 +25,8 @@
 <script>
 import { Card, Divider } from "vant";
 import Vicon from "vue-awesome/components/Icon";
+import "vue-awesome/icons/regular/clock";
+import "vue-awesome/icons/map-marker-alt";
 
 export default {
   /* details 需要包括：

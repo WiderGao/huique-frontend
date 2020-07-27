@@ -53,6 +53,11 @@
 <script>
 import { Image, Cell, CellGroup, Button } from "vant";
 import Vicon from "vue-awesome/components/Icon";
+import "vue-awesome/icons/user-circle";
+import "vue-awesome/icons/shoe-prints";
+import "vue-awesome/icons/coins";
+import "vue-awesome/icons/question";
+import "vue-awesome/icons/info";
 
 export default {
   components: {

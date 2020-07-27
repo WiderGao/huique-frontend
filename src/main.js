@@ -8,11 +8,13 @@ import store from './store'
 
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
-import "vue-awesome/icons";
 import "@/theme/main.scss";
 
-axios.defaults.baseURL = "http://127.0.0.1:3000";
-// axios.defaults.baseURL = "http://api.wider.ink";
+if (process.env.NODE_ENV == "development")
+  axios.defaults.baseURL = "http://127.0.0.1:3000";
+else if (process.env.NODE_ENV == "production")
+  axios.defaults.baseURL = "http://api.wider.ink";
+
 axios.defaults.withCredentials = true;
 Vue.prototype.$ajax = axios
 Vue.config.productionTip = false
@@ -33,7 +35,6 @@ axios.interceptors.request.use(
     Promise.reject(error)
   }
 )
-
 new Vue({
   router,
   store,

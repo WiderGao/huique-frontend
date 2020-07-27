@@ -19,6 +19,8 @@
 <script>
 import { Cell, CellGroup } from "vant";
 import Vicon from "vue-awesome/components/Icon";
+import "vue-awesome/icons/coins";
+import "vue-awesome/icons/briefcase-medical";
 
 export default {
   components: {

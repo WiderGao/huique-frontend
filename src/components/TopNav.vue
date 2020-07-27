@@ -35,6 +35,9 @@
 <script>
 import Vicon from "vue-awesome/components/Icon";
 import { NavBar, Icon, ShareSheet, Image } from "vant";
+import "vue-awesome/icons/chevron-left";
+import "vue-awesome/icons/share-alt";
+
 export default {
   components: {
     [NavBar.name]: NavBar,

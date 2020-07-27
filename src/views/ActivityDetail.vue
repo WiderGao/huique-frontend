@@ -51,6 +51,12 @@
 import { Cell, CellGroup, Image, Button, Toast } from "vant";
 import api from "../api";
 import Vicon from "vue-awesome/components/Icon";
+import "vue-awesome/icons/map-marker-alt";
+import "vue-awesome/icons/regular/clock";
+import "vue-awesome/icons/clock";
+import "vue-awesome/icons/regular/calendar-alt";
+import "vue-awesome/icons/info-circle";
+import "vue-awesome/icons/regular/sticky-note";
 
 export default {
   components: {
