@@ -11,7 +11,7 @@ export default {
     api.User.logout()
       .then((data) => {
         this.$toast.success(data);
-        this.$router.push({ name: "Home" });
+        this.$router.push({ name: "Activity" });
       })
       .catch((error) => {
         this.$toast.fail(error.message);

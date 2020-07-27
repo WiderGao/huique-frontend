@@ -12,6 +12,7 @@
         </template>
       </van-cell>
     </van-cell-group>
+    <div class="desc">更多功能，敬请期待</div>
   </div>
 </template>
 
@@ -29,6 +30,9 @@ export default {
 </script>
 
 <style scoped>
+.desc {
+  text-align: center;
+}
 .fa-icon {
   font-size: 36px;
   margin-right: 0.25em;

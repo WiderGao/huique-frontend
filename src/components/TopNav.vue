@@ -8,7 +8,7 @@
     >
       <template #left>
         <v-icon
-          v-if="$route.name!='Home'&&$route.name!='Info'&&$route.name!='Profile'"
+          v-if="$route.name!='Activity'&&$route.name!='Info'&&$route.name!='Profile'"
           name="chevron-left"
           color="#1989fa"
           scale="1.25"

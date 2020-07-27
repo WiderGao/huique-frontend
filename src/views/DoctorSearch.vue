@@ -11,6 +11,7 @@
       ></van-search>
     </form>
     <div v-if="searchValue!=''" class="search-info-desc">共{{showList.length}}条搜索结果</div>
+    <van-empty v-if="showList.length==0" image="search" description="未找到相关信息"></van-empty>
     <van-cell-group v-if="searchValue===''">
       <van-cell
         v-for="item in showList"
@@ -34,13 +35,14 @@
 </template>
 
 <script>
-import { Cell, CellGroup, Search } from "vant";
+import { Cell, CellGroup, Search, Empty } from "vant";
 import api from "../api";
 export default {
   components: {
     [Cell.name]: Cell,
     [CellGroup.name]: CellGroup,
     [Search.name]: Search,
+    [Empty.name]: Empty,
   },
   data() {
     return {

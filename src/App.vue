@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <top-nav></top-nav>
-    <router-view></router-view>
+    <transition name="van-fade" mode="out-in" :duration="100">
+      <router-view></router-view>
+    </transition>
     <bottom-tab></bottom-tab>
   </div>
 </template>

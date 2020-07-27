@@ -1,30 +1,34 @@
 <template>
   <div class="login-wrap">
+    <van-image :src="require('@/assets/img/header.png')" style="padding-top: 20px"></van-image>
+    <div class="desc">灰雀，关注医疗移民</div>
     <van-form label-width="3.2em" @submit="onSubmit">
-      <van-field
-        v-model="phone"
-        type="tel"
-        name="phone"
-        label="手机号"
-        placeholder="请输入手机号"
-        left-icon="phone"
-        :rules="[{ required: true, message: '手机号不能为空' },{ validator:validPhone, message:'请输入正确手机号'}]"
-      />
-      <van-field
-        v-model="password"
-        type="password"
-        name="password"
-        label="密码"
-        placeholder="请输入密码"
-        left-icon="lock"
-        :rules="[
+      <div class="form">
+        <van-field
+          v-model="phone"
+          type="tel"
+          name="phone"
+          label="手机号"
+          placeholder="请输入手机号"
+          left-icon="phone"
+          :rules="[{ required: true, message: '手机号不能为空' },{ validator:validPhone, message:'请输入正确手机号'}]"
+        />
+        <van-field
+          v-model="password"
+          type="password"
+          name="password"
+          label="密码"
+          placeholder="请输入密码"
+          left-icon="lock"
+          :rules="[
           { required: true, message: '密码不能为空' },
           { validator: validatePassLength, message: '密码长度为8-16位字符' },
           { validator: validatePassSpacesChar, message: '密码不能包含空格' },
           { validator: validatePassSpecialChar, message: '密码包含非法字符'},
         ]"
-      />
-      <div style="margin: 16px;">
+        />
+      </div>
+      <div class="btn" style="margin: 16px;">
         <van-button round block type="info" native-type="submit">登录</van-button>
       </div>
     </van-form>
@@ -32,7 +36,7 @@
 </template>
 
 <script>
-import { Form, Field, Button, Toast } from "vant";
+import { Form, Field, Button, Toast, Image } from "vant";
 import api from "../api";
 export default {
   components: {
@@ -40,6 +44,7 @@ export default {
     [Form.name]: Form,
     [Button.name]: Button,
     [Toast.name]: Toast,
+    [Image.name]: Image,
   },
   data() {
     return {
@@ -52,7 +57,7 @@ export default {
       api.User.login(values.phone, values.password)
         .then((data) => {
           this.$toast.success(data);
-          this.$router.push({ name: "Home" });
+          this.$router.push({ name: "Activity" });
         })
         .catch((error) => {
           this.$toast.fail(error.message);
@@ -92,5 +97,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.desc {
+  text-align: center;
+  padding: 20px;
+}
 </style>

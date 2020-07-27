@@ -1,5 +1,6 @@
 <template>
   <div class="about-wrap">
+    <van-image :src="require('@/assets/img/header.png')" style="padding-top: 20px"></van-image>
     <van-cell-group>
       <van-cell title="功能简介" :label="feature"></van-cell>
       <van-cell title="灰雀简介" :label="huique"></van-cell>
@@ -13,13 +14,14 @@
 </template>
 
 <script>
-import { Cell, CellGroup, Button } from "vant";
+import { Cell, CellGroup, Button, Image } from "vant";
 import api from "../api";
 export default {
   components: {
     [Cell.name]: Cell,
     [CellGroup.name]: CellGroup,
     [Button.name]: Button,
+    [Image.name]: Image,
   },
   data() {
     return {

@@ -1,0 +1,29 @@
+@import "./base";
+.register-wrap {
+  .desc {
+    padding: 0 1em 2em 1em;
+    color: $main-color2;
+    font-size: 1.5em;
+  }
+  .form {
+    margin: 0 1em;
+    border-radius: 22px;
+    overflow: hidden;
+    .van-cell {
+      line-height: 40px;
+      .van-field__error-message {
+        padding: 0 10px;
+        line-height: 1;
+      }
+      input {
+        padding: 0 10px;
+      }
+      input:-internal-autofill-selected {
+        border-radius: 6px;
+      }
+    }
+  }
+  .btn {
+    margin: 1em;
+  }
+}

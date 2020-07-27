@@ -1,22 +1,16 @@
 <template>
   <div class="bottom-tab">
-    <van-tabbar route>
-      <van-tabbar-item replace to="/home">
-        <span>活动</span>
+    <van-tabbar v-model="active">
+      <van-tabbar-item
+        v-for="item in menu"
+        :key="item.name"
+        :name="item.name"
+        :to="item.to"
+        replace
+      >
+        <span>{{item.title}}</span>
         <template #icon="props">
-          <v-icon :name="props.active ? 'home':'home'"></v-icon>
-        </template>
-      </van-tabbar-item>
-      <van-tabbar-item replace to="/info" icon="search">
-        <span>查询</span>
-        <template #icon="props">
-          <v-icon :name="props.active ? 'search':'search'"></v-icon>
-        </template>
-      </van-tabbar-item>
-      <van-tabbar-item replace to="/profile" icon="user-o">
-        <span>我的</span>
-        <template #icon="props">
-          <v-icon :name="props.active ? 'user':'regular/user'"></v-icon>
+          <v-icon :name="props.active ? item.icon.active : item.icon.inactive"></v-icon>
         </template>
       </van-tabbar-item>
     </van-tabbar>
@@ -34,6 +28,40 @@ export default {
     [TabbarItem.name]: TabbarItem,
     [Icon.name]: Icon,
     "v-icon": Vicon,
+  },
+  data() {
+    return {
+      active: "",
+      menu: [
+        {
+          name: "Activity",
+          title: "活动",
+          icon: {
+            active: "home",
+            inactive: "home",
+          },
+          to: "/activity",
+        },
+        {
+          name: "Info",
+          title: "查询",
+          icon: {
+            active: "search",
+            inactive: "search",
+          },
+          to: "/info",
+        },
+        {
+          name: "Profile",
+          title: "我的",
+          icon: {
+            active: "user",
+            inactive: "regular/user",
+          },
+          to: "/profile",
+        },
+      ],
+    };
   },
 };
 </script>

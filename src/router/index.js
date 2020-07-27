@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import store from '@/store'
 import axios from 'axios'
 
-import HomePage from '@/views/Activity.vue'
+import ActivityPage from '@/views/Activity.vue'
 import ActivityDetail from '@/views/ActivityDetail.vue'
 import InfoPage from '@/views/Info.vue'
 import ProfilePage from '@/views/Profile.vue'
@@ -32,12 +32,12 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    redirect: { name: 'Home' }
+    redirect: { name: 'Activity' }
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: HomePage,
+    path: '/activity',
+    name: 'Activity',
+    component: ActivityPage,
     meta: {
       title: '活动',
       requireAuth: false
@@ -230,15 +230,10 @@ router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = "灰雀 · " + to.meta.title;
   }
-  // 针对已登录且访问登录页面
-  if (Vue.$cookies.get("logged") == "true" && to.name == 'Login') {
-    next({
-      name: 'Home'
-    })
-  }
+
   //用保存的cookie判断是否已经登录
   //这个要在判断页面访问权限之前
-  else if (Vue.$cookies.get("logged") == "true" && store.state.phone == null) {
+  if (Vue.$cookies.get("logged") == "true" && store.state.phone == null) {
     Promise.all(
       [
         api.User.getUserInfo(),
@@ -250,19 +245,27 @@ router.beforeEach((to, from, next) => {
         Vue.$cookies.remove("logged");
         console.log(error);
       })
+  }
+  // console.log(to.name)
 
-    next();
+  // 针对已登录且访问登录页面
+  if (Vue.$cookies.get("logged") == "true" && to.name == 'Login') {
+    next({
+      name: 'Activity'
+    })
   }
   // 针对登录才能访问的页面
-  else if (store.state.phone == null && to.meta.requireAuth) {
-    // console.log(to)
+  else if (Vue.$cookies.get("logged") != "true" && to.meta.requireAuth) {
     Toast.fail('请先登录');
     next({
       name: 'Login'
     })
   }
-  else next();
+  else {
+    next();
+  }
 })
+
 router.onError((error) => {
   console.log(error)
 })

@@ -17,6 +17,7 @@
           class="search-info-desc"
         >{{fundType.length}}大病种，{{sum(fundType.map(item => item.num))}}条常见信息整合</div>
         <div v-else class="search-info-desc">共{{showList.length}}条搜索结果</div>
+        <van-empty v-if="showList.length==0" image="search" description="未找到相关信息"></van-empty>
         <van-cell-group>
           <van-cell
             v-for="item in showList"
@@ -74,7 +75,7 @@
 </template>
 
 <script>
-import { Cell, CellGroup, Image, Search, Tab, Tabs } from "vant";
+import { Cell, CellGroup, Image, Search, Tab, Tabs, Empty } from "vant";
 import api from "../api";
 export default {
   components: {
@@ -84,6 +85,7 @@ export default {
     [Search.name]: Search,
     [Tab.name]: Tab,
     [Tabs.name]: Tabs,
+    [Empty.name]: Empty,
   },
   data() {
     return {
