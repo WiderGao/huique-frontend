@@ -40,6 +40,7 @@
 </template>
 
 <script>
+  import api from '../api'
   export default {
     name: 'FundSearch',
     data() {
@@ -61,12 +62,14 @@
       },
     },
     created() {
-      this.$ajax.get("fundtypemsg").then((response) => {
-        if (response.data.status == 200) {
-          this.fundType = response.data.msg;
+      api.Fund.getFundType()
+        .then((data) => {
+          this.fundType = data;
           this.showList = this.fundType;
-        }
-      });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
   }

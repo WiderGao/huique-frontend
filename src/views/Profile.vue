@@ -45,6 +45,7 @@
       <div
         class="box-card"
         @click="toLogout"
+        v-if="$store.state.username!=null"
       >
         退出登录
       </div>
@@ -73,7 +74,7 @@
         this.$router.push("/about")
       },
       toLogout:function () {
-
+        this.$router.push('/logout')
       }
     }
 

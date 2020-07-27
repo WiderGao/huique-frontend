@@ -5,10 +5,16 @@
         <span>{{detail.name}}</span>
         <el-button
           v-if="$store.state.storedFund.map(item => item.fundid).includes(detail.fundid)"
-          style="float: right; padding: 3px 0"
+          style="float: right"
           type="info"
-        >收藏此基金</el-button>
-        <el-button v-else  type="info" @click="handleStore">收藏</el-button>
+          @click="handleCancel"
+        >取消收藏</el-button>
+        <el-button
+          v-else
+          type="primary"
+          @click="handleStore"
+          style="float: right"
+        >收藏</el-button>
       </div>
       <div class="from">
         <div class="detail">

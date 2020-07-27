@@ -38,7 +38,13 @@
             type="info"
             @click="handleCancel"
           >取消报名</el-button>
-          <el-button v-else round block type="info" @click="handleEnroll">报名</el-button>
+          <el-button
+            v-else
+            round
+            block
+            type="primary"
+            @click="handleEnroll"
+          >报名</el-button>
         </div>
       </div>
     </div>
@@ -59,50 +65,36 @@
       },
       //报名
       handleEnroll() {
-        this.$ajax
-          .get("/activitymsg/joinactivity", {
-            params: {
-              activityid: this.detail.activityid,
-            },
+        api.Activity.joinActivity(this.detail.activityid)
+          .then((data) => {
+            this.$store.commit("addJoinedActivity", this.detail);
+            this.$message({
+              message: data,
+              type: 'success'
+            });
           })
-          .then((response) => {
-            if (response.data.status == 200) {
-              this.$store.commit("addJoinedActivity", this.detail);
-              this.$message({
-                message: '报名成功',
-                type: 'success'
-              });
-            } else this.$message.error(response.data.msg);
+          .catch((error) => {
+            this.$message.error(error.message);
+            console.log(error);
           });
       },
       //取消报名
       handleCancel() {
-        this.$ajax
-          .get("/activitymsg/cancelactivity", {
-            params: {
-              activityid: this.detail.activityid,
-            },
+        api.Activity.exitActivity(this.detail.activityid)
+          .then((data) => {
+            this.$store.commit("removeJoinedActivity", this.detail.activityid);
+            this.$toast.success(data);
           })
-          .then((response) => {
-            if (response.data.status == 200) {
-              this.$store.commit("removeJoinedActivity", this.detail.activityid);
-              this.$message({
-                message: response.data.msg,
-                type: 'success'
-              });
-            } else this.$message.error(response.data.msg);
+          .catch((error) => {
+            this.$toast.fail(error.message);
+            console.log(error);
           });
       },
     },
     created() {
-      this.$ajax
-        .get("activitymsg", {
-          params: {
-            activityid: this.$route.params.activityid,
-          },
-        })
-        .then((response) => {
-          if (response.data.status == 200) this.detail = response.data.msg;
+      api.Activity.getOneActivity(this.$route.params.activityid)
+        .then((data) => {
+          this.detail = data;
         })
         .catch((error) => {
           console.log(error);

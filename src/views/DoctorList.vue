@@ -15,6 +15,7 @@
 </template>
 
 <script>
+  import api from '../api'
   export default {
     name: 'DoctorList',
     data() {
@@ -23,16 +24,11 @@
       };
     },
     mounted() {
-      this.$ajax
-        .get("sectionmsg/expert", {
-          params: {
-            section: this.$route.params.section
-          }
+      api.Doctor.getDoctor(this.$route.params.section)
+        .then((data) => {
+          this.doctorList = data;
         })
-        .then(response => {
-          this.doctorList = response.data;
-        })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     }

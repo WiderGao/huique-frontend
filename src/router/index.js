@@ -116,6 +116,34 @@ const routes = [
       requireAuth: false
     }
   },
+  {
+    path: '/raise-help',
+    name: '代写轻松筹/水滴筹',
+    component: () => import('../views/RaiseHelp'),
+    meta: {
+      title: '活动',
+      requireAuth: true
+    }
+  },
+  {
+    path: '/apply-help',
+    name: 'ApplyHelp',
+    component: () => import('../views/ApplyHelp'),
+    meta: {
+      title: '帮助申请基金',
+      requireAuth: true
+    }
+  },
+  {
+    path: '/logout',
+    name: 'Logout',
+    component: () => import('../views/Logout'),
+    meta: {
+      title: '登出',
+      requireAuth: true
+    }
+  },
+
 ]
 
 const router = new VueRouter({

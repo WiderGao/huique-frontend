@@ -16,6 +16,10 @@
             <el-footer>
               <Speaker/>
             </el-footer>
+            <div>
+              <div class="box-card1" @click="toApplyHelp">帮助申请基金</div>
+              <div class="box-card1" @click="toRaiseHelp">代写轻松筹/水滴筹</div>
+            </div>
             <Megtable class="table"/>
           </el-container>
         </div>
@@ -42,6 +46,14 @@ import ActivityPanel from '../components/ActivityPanel'
 import Buttom from '../components/Buttom'
 export default {
   name: 'Home',
+  methods:{
+    toApplyHelp:function () {
+      this.$router.push('/apply-help');
+    },
+    toRaiseHelp:function () {
+      this.$router.push('/raise-help');
+    }
+  },
   components: {
     ActivityPanel,
     Carousel,
@@ -68,5 +80,21 @@ export default {
     box-sizing: border-box;
     box-shadow: 0 12px 20px rgba(0,0,0,0.5);
     border-radius: 10px;
+  }
+  .box-card1{
+    width: 44%;
+    float: left;
+    height: 50px;
+    border-collapse:collapse;
+    text-align: center;
+    line-height: 45px;
+    margin: 6px 20px;
+    font-size: 20px;
+    background: rgb(39, 77, 160);
+    box-sizing: border-box;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+    border-radius: 25px;
+    color: #e7eef6;
+    font-weight: bold;
   }
 </style>
