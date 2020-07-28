@@ -37,7 +37,7 @@
 </template>
 
 <script>
-  import api from '../api'
+  import api from '@/api'
   import ActivitiesItems from './ActivitiesItems'
   export default {
     name: 'ActivityPanel',

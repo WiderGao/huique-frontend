@@ -7,7 +7,7 @@
       @select="handleSelect"
     >
       <span style="float: left;color: gray;font-size: 18px;font-weight: bold;border-right:1px gray;margin-right: 50px">
-        <img src="../assets/img/logo.png" style="width: 50px;height: 50px"/>
+        <img src="@/assets/img/logo.png" style="width: 50px;height: 50px"/>
         灰雀
       </span>
       <el-menu-item index="1" @click= "toHome" style="margin-left: 12%">

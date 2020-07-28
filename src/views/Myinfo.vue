@@ -51,7 +51,7 @@
 </template>
 
   <script>
-    import api from '../api'
+    import api from '@/api'
     import MyFund from '../components/MyFund'
   import MyActivities from '../components/MyActivities'
   export default {

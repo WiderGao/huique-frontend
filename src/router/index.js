@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import store from '../store'
-import api from '../api'
+import store from '@/store'
+import api from '@/api'
 Vue.use(VueRouter)
 
 const routes = [

@@ -2,7 +2,7 @@
   <div class="speaker">
     <hr noshade="true" size="3px" color="#3986e5" style="margin-bottom: 5px"/>
     <div style="float: left">
-      <img src="../assets/img/speaker.png"/>
+      <img src="@/assets/img/speaker.png"/>
     </div>
     <div style="float: left;font-size: 20px">
       <h6>{{ msg }}</h6>
