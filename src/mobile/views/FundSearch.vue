@@ -10,14 +10,14 @@
             placeholder="请输入病名"
             @input="onSearch"
             @clear="onClear"
-          ></van-search>
+          />
         </form>
         <div
           v-if="searchValue===''"
           class="search-info-desc"
-        >{{fundType.length}}大病种，{{sum(fundType.map(item => item.num))}}条常见信息整合</div>
-        <div v-else class="search-info-desc">共{{showList.length}}条搜索结果</div>
-        <van-empty v-if="showList.length==0" image="search" description="未找到相关信息"></van-empty>
+        >{{ fundType.length }}大病种，{{ sum(fundType.map(item => item.num)) }}条常见信息整合</div>
+        <div v-else class="search-info-desc">共{{ showList.length }}条搜索结果</div>
+        <van-empty v-if="showList.length==0" image="search" description="未找到相关信息" />
         <van-cell-group>
           <van-cell
             v-for="item in showList"
@@ -36,7 +36,7 @@
                 fit="cover"
                 :src="item.img"
                 style="margin-right:10px"
-              ></van-image>
+              />
             </template>
           </van-cell>
         </van-cell-group>
@@ -53,7 +53,7 @@
                 fit="cover"
                 :src="require('@/assets/img/chou.png')"
                 style="margin-right:10px"
-              ></van-image>
+              />
             </template>
           </van-cell>
           <van-cell title="帮助申请基金" label="仅为部分人服务" is-link center to="/apply-help">
@@ -65,7 +65,7 @@
                 fit="cover"
                 :src="require('@/assets/img/shen.png')"
                 style="margin-right:10px"
-              ></van-image>
+              />
             </template>
           </van-cell>
         </van-cell-group>
@@ -95,6 +95,16 @@ export default {
       activeTab: 0,
     };
   },
+  created() {
+    api.Fund.getFundType()
+      .then((data) => {
+        this.fundType = data;
+        this.showList = this.fundType;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
   methods: {
     onSearch(text) {
       if (text === "") {
@@ -119,16 +129,6 @@ export default {
       for (let i = 0; i < arr.length; i++) summary += arr[i];
       return summary;
     },
-  },
-  created() {
-    api.Fund.getFundType()
-      .then((data) => {
-        this.fundType = data;
-        this.showList = this.fundType;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   },
 };
 </script>
