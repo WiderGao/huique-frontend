@@ -5,6 +5,12 @@ module.exports = {
       libraryName: 'vant',
       libraryDirectory: 'es',
       style: true
-    }, 'vant']
+    }, 'vant'
+    ],
+    ['import', {
+      libraryName: 'element-ui',
+      customStyleName: (name) => `element-ui/lib/theme-chalk/${name}.css`
+    }, 'element-ui'
+    ]
   ]
 }

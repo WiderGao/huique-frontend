@@ -1,24 +1,10 @@
 <template>
   <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
     <el-form-item label="姓名">
-      <el-input
-        v-model="phone"
-        type="text"
-        placeholder="请输入您的姓名"
-        rows="1"
-        required
-        readonly
-      ></el-input>
+      <el-input v-model="phone" type="text" placeholder="请输入您的姓名" rows="1" required readonly></el-input>
     </el-form-item>
     <el-form-item label="手机号码">
-      <el-input
-        v-model="phone"
-        type="tel"
-        placeholder="请输入您的手机号码"
-        rows="1"
-        required
-        readonly
-      ></el-input>
+      <el-input v-model="phone" type="tel" placeholder="请输入您的手机号码" rows="1" required readonly></el-input>
     </el-form-item>
     <el-form-item label="情况描述">
       <el-input
@@ -35,36 +21,41 @@
 </template>
 
 <script>
-  export default {
-    name: 'ApplyHelp',
-    data() {
-      return {
-        name: this.$store.state.username,
-        phone: this.$store.state.phone,
-        details: "",
-      };
+import { Form, FormItem, Input } from "element-ui";
+export default {
+  name: "ApplyHelp",
+  components: {
+    [Form.name]: Form,
+    [FormItem.name]: FormItem,
+    [Input.name]: Input,
+  },
+  data() {
+    return {
+      name: this.$store.state.username,
+      phone: this.$store.state.phone,
+      details: "",
+    };
+  },
+  methods: {
+    handleSubmit() {
+      api.User.changeUserInfo(
+        this.phone,
+        this.username,
+        this.$store.state.address,
+        this.details,
+        this.$store.state.activity_volunteer_detail
+      )
+        .then((data) => {
+          this.$toast.success("提交成功");
+        })
+        .catch((error) => {
+          this.$toast.fail("请重试");
+          console.log(error);
+        });
     },
-    methods: {
-      handleSubmit() {
-        api.User.changeUserInfo(
-          this.phone,
-          this.username,
-          this.$store.state.address,
-          this.details,
-          this.$store.state.activity_volunteer_detail
-        )
-          .then((data) => {
-            this.$toast.success("提交成功");
-          })
-          .catch((error) => {
-            this.$toast.fail("请重试");
-            console.log(error);
-          });
-      },
-    },
-  }
+  },
+};
 </script>
 
 <style scoped>
-
 </style>

@@ -43,6 +43,7 @@ import Megtable from "../components/Megtable";
 import Speaker from "../components/Speaker";
 import ActivityPanel from "../components/ActivityPanel";
 import Buttom from "../components/Buttom";
+import { Container, Aside, Main, Footer } from "element-ui";
 export default {
   name: "Home",
   methods: {
@@ -60,6 +61,10 @@ export default {
     Megtable,
     Speaker,
     Buttom,
+    [Container.name]: Container,
+    [Aside.name]: Aside,
+    [Main.name]: Main,
+    [Footer.name]: Footer,
   },
 };
 </script>
