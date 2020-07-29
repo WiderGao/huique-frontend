@@ -11,7 +11,7 @@ Vue.use(VueCookies)
 import "./theme/main.scss";
 
 if (process.env.NODE_ENV == "development")
-  axios.defaults.baseURL = "http://127.0.0.1:3000";
+  axios.defaults.baseURL = "http://api2.wider.ink";
 else if (process.env.NODE_ENV == "production")
   axios.defaults.baseURL = "http://api.wider.ink";
 

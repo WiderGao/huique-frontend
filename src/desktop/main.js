@@ -8,7 +8,11 @@ import axios from 'axios'
 import VueCookies from 'vue-cookies'
 Vue.use(VueCookies)
 
-axios.defaults.baseURL = "http://api2.wider.ink/";
+if (process.env.NODE_ENV == "development")
+  axios.defaults.baseURL = "http://api2.wider.ink";
+else if (process.env.NODE_ENV == "production")
+  axios.defaults.baseURL = "http://api.wider.ink";
+
 axios.defaults.withCredentials = true;
 axios.interceptors.request.use(
   config => {
