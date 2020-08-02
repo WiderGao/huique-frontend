@@ -2,7 +2,7 @@
   <div class="app">
     <div
       v-for="item in faq"
-      :class="box-card"
+      class="box-card"
       :key="item.helpid"
       @click="[changeActive(item.fundid),toDetail(item.name)]"
     >
@@ -42,12 +42,11 @@ export default {
 
 <style scoped>
 .box-card {
-  width: 40%;
-  float: left;
-  height: 50px;
+  width: 70%;
+  margin: 15px auto;
+  height: 100px;
   border-collapse: collapse;
   text-align: center;
-  margin: 15px 60px;
   font-size: 15px;
   background: rgb(231, 238, 246);
   box-sizing: border-box;
@@ -55,5 +54,13 @@ export default {
   border-radius: 15px;
   color: #39456b;
   font-weight: bold;
+}
+.app{
+  background-color: #f6c196;
+  padding: 0px;
+  margin: 0px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 </style>

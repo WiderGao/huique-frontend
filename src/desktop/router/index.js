@@ -158,8 +158,10 @@ router.beforeEach((to, from, next) => {
   }
   // 针对登录才能访问的页面
   if (to.meta.requireAuth && store.state.phone == null) {
+    alert('请先登录');
     next({
       // Toast.fail('请先登录');
+
       name: 'Login'
     })
   }

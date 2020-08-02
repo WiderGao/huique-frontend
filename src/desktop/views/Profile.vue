@@ -10,6 +10,8 @@
         </div>
       </el-header>
       <el-main>
+        <br/>
+        <br/>
         <div class="box-card" v-if="$store.state.username==null" @click="toLogin">登录</div>
         <div class="box-card" v-if="$store.state.username==null" @click="toRegister">注册</div>
         <div class="box-card" @click="toMyinfo">个人信息</div>
@@ -54,16 +56,26 @@ export default {
 </script>
 
 <style scoped>
+
+  .app{
+    background-color: #f6c196;
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
 .header {
-  margin: 0px;
-  background: rgba(64, 224, 205, 0.8);
+  position: relative;
+  margin: 20px 40px;
+  background: rgb(39, 77, 160);
   padding: 20px;
   box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
 }
 .header h2 {
-  color: #fff;
+  color: #e7eef6;
 }
 
 .box-card {
@@ -76,7 +88,7 @@ export default {
   font-size: 15px;
   background: rgb(231, 238, 246);
   box-sizing: border-box;
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
   border-radius: 15px;
   color: #39456b;
   font-weight: bold;

@@ -60,7 +60,7 @@
     margin: 0px;
     padding: 0px;
     font-family: sans-serif;
-    background: url("../../assets/img_test/bk.jpg");
+    background: url("../../assets/img/bk1.png");
     background-size: cover;
   }
   .box{

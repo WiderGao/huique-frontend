@@ -2,9 +2,11 @@
   <div class="app">
     <el-card class="box-card" v-for="item in doctorList" :key="item.id">
       <div class="text">
-        所在医院：{{item.corporation}}
-        工作科室：{{item.section}}
-        专业擅长：{{item.major}}
+        <p style="font-size: 23px">{{item.name}}</p>
+        <br/>
+        <p>所在医院：{{item.corporation}}</p>
+        <p>工作科室：{{item.section}}</p>
+        <p>专业擅长：{{item.major}}</p>
       </div>
     </el-card>
   </div>
@@ -38,9 +40,18 @@ export default {
 <style scoped>
 .text {
   font-size: 14px;
-  padding: 18px 0;
+  padding: 5px 0;
 }
 .box-card {
   width: 480px;
+  margin: 20px;
+}
+.app{
+  background-color: #f6c196;
+  padding: 0px;
+  margin: 0px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 </style>
