@@ -43,13 +43,14 @@
 </template>
 
 <script>
-import { Button, Tag } from "element-ui";
-import api from "@/api";
+  import {Button, Message, Tag} from "element-ui";
+  import api from "@/api";
 export default {
   name: "FundDetail",
   components: {
     [Button.name]: Button,
     [Tag.name]: Tag,
+    [Message.name]: Message,
   },
   data() {
     return {
@@ -66,6 +67,11 @@ export default {
   methods: {
     //收藏
     handleStore() {
+      if(this.$store.state.phone == null)
+      {
+        this.$message.error('请先登录');
+        return;
+      }
       api.Fund.storeFund(this.detail.fundid)
         .then((data) => {
           this.$store.commit("addStoredFund", this.detail);

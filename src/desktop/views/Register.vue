@@ -30,8 +30,12 @@
 
 <script>
   import api from '@/api'
+  import {Message} from 'element-ui';
   export default {
     name: 'Register',
+    components: {
+      [Message.name]: Message,
+    },
     data() {
       return {
         phone: "",

@@ -22,8 +22,12 @@
 
 <script>
   import api from '@/api'
+  import {Message} from "element-ui";
   export default {
     name: 'Login',
+    components: {
+      [Message.name]: Message,
+    },
     methods:{
       toRegister:function () {
         this.$router.push("/Register")

@@ -6,6 +6,7 @@ import store from '@/store'
 import qs from 'qs'
 import axios from 'axios'
 import VueCookies from 'vue-cookies'
+import {Message} from "element-ui";
 Vue.use(VueCookies)
 
 if (process.env.NODE_ENV == "development")
@@ -30,7 +31,7 @@ axios.interceptors.request.use(
     Promise.reject(error)
   }
 )
-
+Vue.prototype.$message = Message;
 Vue.prototype.$ajax = axios
 Vue.config.productionTip = false
 new Vue({
