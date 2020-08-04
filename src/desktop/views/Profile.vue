@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div class="profile-wrap">
     <el-container>
       <el-header>
         <div class="header">
@@ -10,11 +10,13 @@
         </div>
       </el-header>
       <el-main>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <div class="box-card" v-if="$store.state.username==null" @click="toLogin">登录</div>
         <div class="box-card" v-if="$store.state.username==null" @click="toRegister">注册</div>
-        <div class="box-card" @click="toMyinfo">个人信息</div>
+        <div class="box-card" v-if="$store.state.username!=null" @click="toMyinfo">个人信息</div>
+        <div class="box-card" v-if="$store.state.username!=null" @click="toMyActivity">我的活动</div>
+        <div class="box-card" v-if="$store.state.username!=null" @click="toMyFund">我的基金</div>
         <div class="box-card" @click="toFAQ">帮助反馈</div>
         <div class="box-card" @click="toAbout">关于灰雀</div>
         <div class="box-card" @click="toLogout" v-if="$store.state.username!=null">退出登录</div>
@@ -39,6 +41,12 @@ export default {
     toMyinfo: function () {
       this.$router.push("/profile/myinfo");
     },
+    toMyActivity: function () {
+      this.$router.push("/profile/myactivity");
+    },
+    toMyFund: function () {
+      this.$router.push("/profile/myfund");
+    },
     toFAQ: function () {
       this.$router.push("/FAQ");
     },
@@ -56,22 +64,17 @@ export default {
 </script>
 
 <style scoped>
-
-  .app{
-    background-color: #f6c196;
-    padding: 0px;
-    margin: 0px;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-  }
+.profile-wrap {
+  padding: 0px;
+  height: 100%;
+}
 .header {
   position: relative;
   margin: 20px 40px;
   background: rgb(39, 77, 160);
   padding: 20px;
   box-sizing: border-box;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
 }
 .header h2 {
@@ -79,17 +82,18 @@ export default {
 }
 
 .box-card {
-  width: 40%;
-  float: left;
+  width: 400px;
   height: 50px;
+  line-height: 50px;
   border-collapse: collapse;
   text-align: center;
-  margin: 15px 60px;
+  margin: 15px auto;
+  cursor: pointer;
   font-size: 15px;
-  background: rgb(231, 238, 246);
+  background: #fff;
   box-sizing: border-box;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-  border-radius: 15px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+  border-radius: 25px;
   color: #39456b;
   font-weight: bold;
 }

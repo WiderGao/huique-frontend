@@ -3,26 +3,26 @@ import VueRouter from 'vue-router'
 import store from '@/store'
 import axios from 'axios'
 
-const ActivityPage   = () => import('../views/Activity.vue')
+const ActivityPage = () => import('../views/Activity.vue')
 const ActivityDetail = () => import('../views/ActivityDetail.vue')
-const InfoPage       = () => import('../views/Info.vue')
-const ProfilePage    = () => import('../views/Profile.vue')
-const FundSearch     = () => import('../views/FundSearch.vue')
-const DoctorSearch   = () => import('../views/DoctorSearch.vue')
-const FundType       = () => import('../views/FundType.vue')
-const FundDetail     = () => import('../views/FundDetail.vue')
-const RaiseHelp      = () => import('../views/RaiseHelp.vue')
-const ApplyHelp      = () => import('../views/ApplyHelp.vue')
-const DoctorList     = () => import('../views/DoctorList.vue')
-const Login          = () => import('../views/Login.vue')
-const Logout         = () => import('../views/Logout.vue')
-const Register       = () => import('../views/Register.vue')
-const Myinfo         = () => import('../views/Myinfo.vue')
-const MyActivity     = () => import('../views/MyActivity.vue')
-const MyFund         = () => import('../views/MyFund.vue')
-const FAQ            = () => import('../views/FAQ.vue')
-const About          = () => import('../views/About.vue')
-const Page404        = () => import('../views/404.vue')
+const InfoPage = () => import('../views/Info.vue')
+const ProfilePage = () => import('../views/Profile.vue')
+const FundSearch = () => import('../views/FundSearch.vue')
+const DoctorSearch = () => import('../views/DoctorSearch.vue')
+const FundType = () => import('../views/FundType.vue')
+const FundDetail = () => import('../views/FundDetail.vue')
+const RaiseHelp = () => import('../views/RaiseHelp.vue')
+const ApplyHelp = () => import('../views/ApplyHelp.vue')
+const DoctorList = () => import('../views/DoctorList.vue')
+const Login = () => import('../views/Login.vue')
+const Logout = () => import('../views/Logout.vue')
+const Register = () => import('../views/Register.vue')
+const Myinfo = () => import('../views/Myinfo.vue')
+const MyActivity = () => import('../views/MyActivity.vue')
+const MyFund = () => import('../views/MyFund.vue')
+const FAQ = () => import('../views/FAQ.vue')
+const About = () => import('../views/About.vue')
+const Page404 = () => import('../views/404.vue')
 
 
 import api from '@/api'
@@ -71,7 +71,7 @@ const routes = [
     }
   },
   {
-    path: '/fundtype/:disease',
+    path: '/fund/:disease',
     name: 'FundType',
     component: FundType,
     meta: {
@@ -80,7 +80,7 @@ const routes = [
     }
   },
   {
-    path: '/fund/:fundid',
+    path: '/fund/:disease/:fundid',
     name: 'FundDetail',
     component: FundDetail,
     meta: {

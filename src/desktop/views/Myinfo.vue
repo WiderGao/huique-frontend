@@ -1,81 +1,66 @@
 <template>
-  <div class="app">
-    <el-container>
-      <el-main>
-        <el-form
-          :model="ruleForm"
-          status-icon
-          :rules="rules"
-          ref="ruleForm"
-          label-width="100px"
-          class="demo-ruleForm"
-        >
-          <el-form-item label="姓名" prop="name">
-            <el-input v-model="ruleForm.name" type="text" autocomplete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="手机号" prop="phone">
-            <el-input v-model="ruleForm.phone" type="password" autocomplete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="住址" prop="address">
-            <el-input v-model="ruleForm.address" type="text" autocomplete="off"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="handleSubmit">更新</el-button>
-            <el-button @click="resetForm('ruleForm')">重置</el-button>
-          </el-form-item>
-        </el-form>
-      </el-main>
-      <el-footer></el-footer>
-      <el-main>
-        <el-form
-          :model="ruleForm1"
-          status-icon
-          :rules="rules1"
-          ref="ruleForm1"
-          label-width="100px"
-          class="demo-ruleForm"
-        >
-          <el-form-item label="旧密码" prop="oldPassword">
-            <el-input v-model="ruleForm1.oldPassword" type="password" autocomplete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="新密码" prop="newPassword">
-            <el-input v-model="ruleForm1.newPassword" type="password" autocomplete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="确认密码" prop="checkPassword">
-            <el-input v-model="ruleForm1.checkPassword" type="password" autocomplete="off"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="handleChangePass">提交</el-button>
-            <el-button @click="resetForm('ruleForm1')">重置</el-button>
-          </el-form-item>
-        </el-form>
-      </el-main>
-      <el-footer></el-footer>
-      <el-main>
-        <h2>收藏的基金</h2>
-        <hr />
-        <MyFund></MyFund>
-        <br />
-        <h2>收藏的活动</h2>
-        <hr />
-        <MyActivities></MyActivities>
-      </el-main>
-    </el-container>
+  <div class="my-info-wrap">
+    <el-card>
+      <div slot="header">
+        <span>修改个人信息</span>
+      </div>
+      <el-form
+        :model="ruleForm"
+        status-icon
+        :rules="rules"
+        ref="ruleForm"
+        label-width="100px"
+        class="ruleForm"
+      >
+        <el-form-item label="姓名" prop="name">
+          <el-input v-model="ruleForm.name" type="text" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="手机号" prop="phone">
+          <el-input v-model="ruleForm.phone" type="password" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="住址" prop="address">
+          <el-input v-model="ruleForm.address" type="text" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="handleSubmit">更新</el-button>
+          <el-button @click="resetForm('ruleForm')">重置</el-button>
+        </el-form-item>
+      </el-form>
+      <el-form
+        :model="ruleForm1"
+        status-icon
+        :rules="rules1"
+        ref="ruleForm1"
+        label-width="100px"
+        class="ruleForm"
+      >
+        <el-form-item label="旧密码" prop="oldPassword">
+          <el-input v-model="ruleForm1.oldPassword" type="password" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="新密码" prop="newPassword">
+          <el-input v-model="ruleForm1.newPassword" type="password" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="确认密码" prop="checkPassword">
+          <el-input v-model="ruleForm1.checkPassword" type="password" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="handleChangePass">提交</el-button>
+          <el-button @click="resetForm('ruleForm1')">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
   </div>
 </template>
 
   <script>
 import api from "@/api";
-import MyFund from "../components/MyFund";
-import MyActivities from "../components/MyActivities";
-import { Container, Main, Form, FormItem, Button, Input } from "element-ui";
+import { Card, Form, FormItem, Button, Input } from "element-ui";
 export default {
   name: "Myinfo",
   components: {
     MyActivities,
     MyFund,
-    [Container.name]: Container,
-    [Main.name]: Main,
+    [Card.name]: Card,
     [Form.name]: Form,
     [FormItem.name]: FormItem,
     [Button.name]: Button,
@@ -218,4 +203,11 @@ export default {
 </script>
 
 <style scoped>
+.my-info-wrap {
+  max-width: 700px;
+}
+.ruleForm {
+  max-width: 500px;
+  margin: 0 auto;
+}
 </style>

@@ -1,10 +1,8 @@
 <template >
-  <div class="block shadow">
+  <div class="carousel-wrap">
     <el-carousel height="400px">
       <el-carousel-item v-for="(image, index) in swipeImg" :key="index">
-        <h3>
-          <img :src="image" class="picture" />
-        </h3>
+        <el-image :src="image" fit="cover" class="show-image" style="height:100%;width:100%;"></el-image>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -12,12 +10,13 @@
 
 <script>
 import api from "@/api";
-import { Carousel, CarouselItem } from "element-ui";
+import { Carousel, CarouselItem, Image } from "element-ui";
 export default {
   name: "Carousel",
   components: {
     [Carousel.name]: Carousel,
     [CarouselItem.name]: CarouselItem,
+    [Image.name]: Image,
   },
   data: function () {
     return {
@@ -46,29 +45,11 @@ export default {
 };
 </script>
 
-<style>
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 14px;
-  opacity: 0.75;
-  line-height: 150px;
-  margin: 0;
-}
-
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
-
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
-}
-.shadow {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-  /*border:1px solid #a1a1a1;*/
-  /*border-radius: 8px;*/
-}
-
-.picture {
-  background-size: cover;
+<style lang="scss" scoped>
+.carousel-wrap {
+  margin: 0 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
 }
 </style>

@@ -1,41 +1,41 @@
 <template>
-  <div class="app">
+  <div class="fund-detail-wrap">
     <div class="box-card">
-      <div slot="header" class="clearfix">
-        <span>{{detail.name}}</span>
+      <div class="header" slot="header">
+        <span class="name">{{detail.name}}</span>
         <el-button
           v-if="$store.state.storedFund.map(item => item.fundid).includes(detail.fundid)"
-          style="float: right"
           type="info"
           @click="handleCancel"
         >取消收藏</el-button>
-        <el-button v-else type="primary" @click="handleStore" style="float: right">收藏</el-button>
+        <el-button v-else type="primary" @click="handleStore">收藏</el-button>
       </div>
-      <div class="from">
-        <div class="detail">
+      <div class="content">
+        <div class="record_num">
           <el-tag type="success">备案号</el-tag>
-          {{detail.record_num}}
+          <div>{{detail.record_num}}</div>
         </div>
-        <div class="detail">
+        <div class="people">
           <el-tag type="success">资助对象</el-tag>
-          {{detail.people}}
+          <div>{{detail.people}}</div>
         </div>
-        <div class="detail">
+        <div class="mode">
           <el-tag type="success">资助方式</el-tag>
-          {{detail.mode}}
+          <div>{{detail.mode}}</div>
         </div>
-        <div class="detail">
+        <div class="process">
           <el-tag type="success">申请流程</el-tag>
-          <br />
-          <img :src="detail.process_img" />
+          <div>
+            <img :src="detail.process_img" />
+          </div>
         </div>
-        <div class="detail">
+        <div class="contact">
           <el-tag type="success">联系方式</el-tag>
-          {{detail.contact}}
+          <div>{{detail.contact}}</div>
         </div>
-        <div class="detail">
+        <div class="form">
           <el-tag type="success">申请表</el-tag>
-          {{detail.form}}
+          <a :href="detail.form">{{detail.form}}</a>
         </div>
       </div>
     </div>
@@ -43,8 +43,8 @@
 </template>
 
 <script>
-  import {Button, Message, Tag} from "element-ui";
-  import api from "@/api";
+import { Button, Message, Tag } from "element-ui";
+import api from "@/api";
 export default {
   name: "FundDetail",
   components: {
@@ -67,9 +67,8 @@ export default {
   methods: {
     //收藏
     handleStore() {
-      if(this.$store.state.phone == null)
-      {
-        this.$message.error('请先登录');
+      if (this.$store.state.phone == null) {
+        this.$message.error("请先登录");
         return;
       }
       api.Fund.storeFund(this.detail.fundid)
@@ -126,23 +125,41 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .box-card {
-  background: rgb(231, 238, 246);
+  padding: 20px;
+  background: #fff;
   box-sizing: border-box;
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 14px;
 }
-.app {
-  margin: 0px;
-  padding: 0px;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  .name {
+    font-size: 28px;
+    font-weight: bold;
+  }
 }
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: "";
+.content > * {
+  padding-bottom: 20px;
+  white-space: pre-wrap;
+  display: flex;
 }
-.clearfix:after {
-  clear: both;
+.content .el-tag {
+  margin-right: 16px;
+}
+.content .process div {
+  width: 100%;
+}
+.content .process {
+  flex-wrap: wrap;
+}
+.content .process img {
+  display: block;
+  margin: 10px auto;
+  max-width: 100%;
 }
 </style>

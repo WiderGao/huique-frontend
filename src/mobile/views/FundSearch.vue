@@ -24,7 +24,7 @@
             :key="item.fundtypeid"
             :title="item.name"
             :label="item.num+'条基金信息'"
-            :to="'/fundtype/'+item.name"
+            :to="'/fund/'+item.name"
             is-link
             center
           >

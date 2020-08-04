@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div class="fund-search-wrap">
     <el-container>
       <el-aside class="aside">
         <div class="header">
@@ -23,13 +23,14 @@
           class="showlist"
           @click="toFondlist(item)"
         >
-          <img :src="item.img" class="image" style="float: right;height: 100px;width: 100px" />
-          <div style="padding: 14px;line-height: 20px;margin: 0px">
-            <p style="font-size: 16px">{{item.name}}</p>
-            <br />
-            <p style="font-size: 15px">
-              <span style="font-weight: bold;font-size: 20px;">{{item.num}}</span>条基金信息
-            </p>
+          <div class="content">
+            <div class="name">{{item.name}}</div>
+            <div class="info">
+              <span class="number">{{item.num}}</span>条基金信息
+            </div>
+          </div>
+          <div class="image">
+            <img :src="item.img" />
           </div>
         </div>
       </el-main>
@@ -78,7 +79,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .search-info-desc {
   line-height: 20px;
   font-size: 12px;
@@ -116,11 +117,36 @@ export default {
   float: left;
   position: relative;
   margin: 10px;
-  width: 280px;
+  padding: 10px;
+  width: 266px;
   height: 110px;
   background-color: white;
   box-sizing: border-box;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
   border-radius: 15px;
+  display: flex;
+  flex-wrap: nowrap;
+  .image {
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 100%;
+    img {
+      height: 100%;
+    }
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    flex-grow: 1;
+    .name {
+      font-size: 18px;
+    }
+    .number {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
 }
 </style>

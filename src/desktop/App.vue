@@ -1,33 +1,43 @@
 <template>
   <div class="app">
-    <Nav class="Nav"/>
-    <router-view class="view"/>
+    <top-header></top-header>
+    <router-view class="view"></router-view>
+    <bottom-footer></bottom-footer>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import Nav from './components/Nav'
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld,
-    Nav,
-  }
-}
+    "top-header": Header,
+    "bottom-footer": Footer,
+  },
+};
 </script>
 
 <style>
-  *{
-    margin: 0px;
-    padding: 0px;
-  }
-  .view{
-    margin: 5px;
-  }
-  .Nav{
-    margin: 0px;
-    margin-left: 5px;
-    margin-right: 5px;
-  }
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+body {
+  background: #274995;
+}
+.app {
+  background: #f3c9a9 url("~@/assets/img/bg.svg") bottom/100% no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+.view {
+  max-width: 1200px;
+  width: 100%;
+  flex-grow: 1;
+  margin: 20px 0;
+}
 </style>

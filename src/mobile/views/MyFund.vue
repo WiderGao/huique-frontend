@@ -7,7 +7,7 @@
         :key="item.fundid"
         :title="item.name"
         :label="item.record_num"
-        :to="'/fund/'+item.fundid"
+        :to="'/fund/'+fundType[item.fundtype]+'/'+item.fundid"
         is-link
         center
       ></van-cell>
@@ -27,12 +27,22 @@ export default {
   data() {
     return {
       fund: [],
+      fundType: [],
     };
   },
   created() {
     api.Fund.getStoredFund()
       .then((data) => {
         this.fund = data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    api.Fund.getFundType()
+      .then((data) => {
+        data.forEach((type) => {
+          this.fundType[type.id] = type.name;
+        });
       })
       .catch((error) => {
         console.log(error);

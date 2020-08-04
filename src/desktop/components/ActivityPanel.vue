@@ -1,8 +1,8 @@
 <template>
-  <div class="app">
-    <el-tabs type="border-card" style="background-color: #e7eef6">
+  <div class="activity-panel-wrap">
+    <el-tabs type="card" style="background-color: #e7eef6">
       <el-tab-pane label="报名中">
-        <div v-if="activities.singingUp.length==0" v-html="'<h3>暂无活动</h3>'"></div>
+        <div v-if="activities.singingUp.length==0" class="empty">暂无活动</div>
         <activity-item
           class="activeItem"
           v-else
@@ -13,7 +13,7 @@
         ></activity-item>
       </el-tab-pane>
       <el-tab-pane label="进行中">
-        <div v-if="activities.processing.length==0" v-html="'<h3>暂无活动</h3>'"></div>
+        <div v-if="activities.processing.length==0" class="empty">暂无活动</div>
         <activity-item
           class="activeItem"
           v-else
@@ -24,7 +24,7 @@
         ></activity-item>
       </el-tab-pane>
       <el-tab-pane label="已结束">
-        <div v-if="activities.finished.length==0" v-html="'<h3>暂无活动</h3>'"></div>
+        <div v-if="activities.finished.length==0" class="empty">暂无活动</div>
         <activity-item
           class="activeItem"
           v-else
@@ -112,35 +112,51 @@ export default {
 };
 </script>
 
-<style scoped>
+<style  lang="scss" scoped>
+@media (max-width: 992px) {
+  .activeItem {
+    width: calc(33.3% - 20px) !important;
+    margin: 10px;
+  }
+}
 .activeItem {
-  width: 100%;
-  height: auto;
-  float: left;
+  width: calc(25% - 20px);
+  margin: 10px;
 }
->>> .el-tabs--border-card {
-  border-top-left-radius: 13px;
-  border-top-right-radius: 13px;
-  box-sizing: border-box;
-  box-shadow: 3px 3px rgba(0, 0, 0, 0.3);
+.el-tabs ::v-deep {
+  margin: 20px 0;
+  background-color: unset !important;
+  overflow: visible;
+  .el-tabs__content {
+    overflow: visible !important;
+  }
+  .el-tabs__header,
+  .el-tabs__item,
+  .el-tabs__nav {
+    border: 0;
+  }
+  .el-tabs__header {
+    margin: 10px;
+  }
+  .el-tab-pane {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .el-tabs__item {
+    background-color: rgb(39, 77, 160);
+    color: #fff;
+    border-radius: 20px;
+    margin-right: 10px;
+    // box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+  }
+  .el-tabs__item.is-active {
+    background-color: #ffaa00;
+  }
 }
->>> .el-tabs--border-card > .el-tabs__header {
-  background-color: #274da0;
-  border-top-left-radius: 13px;
-  border-top-right-radius: 13px;
-}
->>> .el-tabs--border-card > .el-tabs__header .el-tabs__item {
+.empty {
+  font-size: 24px;
+  margin: 0 auto;
+  padding: 20px;
   color: #fff;
-  margin-top: 8px;
-  height: 35px;
-}
->>> .el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
-  background-color: #e7eef6;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  height: 35px;
-}
->>> .el-tabs__item {
-  line-height: 30px;
 }
 </style>

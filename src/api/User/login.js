@@ -11,7 +11,7 @@ export default function login(phone, password) {
         password: password,
     }).then(response => {
         if (response.data.status == 200) {
-            Promise.all([getUserInfo(), getJoinedActivity(), getStoredFund()]).then(() => {
+            return Promise.all([getUserInfo(), getJoinedActivity(), getStoredFund()]).then(() => {
                 Vue.$cookies.set("logged", "true", "14d");
                 return response.data.msg;
             }).catch(error => {

@@ -1,9 +1,9 @@
 <template>
-  <div class="app">
+  <div class="doctor-list-wrap">
     <el-card class="box-card" v-for="item in doctorList" :key="item.id">
       <div class="text">
         <p style="font-size: 23px">{{item.name}}</p>
-        <br/>
+        <br />
         <p>所在医院：{{item.corporation}}</p>
         <p>工作科室：{{item.section}}</p>
         <p>专业擅长：{{item.major}}</p>
@@ -42,16 +42,13 @@ export default {
   font-size: 14px;
   padding: 5px 0;
 }
-.box-card {
-  width: 480px;
-  margin: 20px;
+.doctor-list-wrap {
+  display: flex;
+  flex-wrap: wrap;
 }
-.app{
-  background-color: #f6c196;
-  padding: 0px;
-  margin: 0px;
-  position: absolute;
-  height: 100%;
-  width: 100%;
+.box-card {
+  width: calc(50% - 20px);
+  margin: 10px;
+  border-radius: 14px;
 }
 </style>

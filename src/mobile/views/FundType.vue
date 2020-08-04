@@ -6,7 +6,7 @@
         :key="item.fundid"
         :title="item.name"
         :label="item.record_num"
-        :to="'/fund/'+item.fundid"
+        :to="'/fund/'+$route.params.disease+'/'+item.fundid"
         is-link
         center
       ></van-cell>

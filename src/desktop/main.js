@@ -6,7 +6,7 @@ import store from '@/store'
 import qs from 'qs'
 import axios from 'axios'
 import VueCookies from 'vue-cookies'
-import {Message} from "element-ui";
+import { Message } from "element-ui";
 Vue.use(VueCookies)
 
 if (process.env.NODE_ENV == "development")
@@ -19,7 +19,7 @@ axios.interceptors.request.use(
   config => {
     if (config.method === 'post') {
       if (config.headers['Content-Type'] != 'application/x-www-form-urlencoded') {
-        console.log(config.data)
+        // console.log(config.data)
         config.data = qs.stringify(config.data)
       }
 

@@ -1,0 +1,165 @@
+div<template>
+  <div class="activity">
+    <Speaker></Speaker>
+    <el-row :gutter="10">
+      <el-col :span="17">
+        <div class="left-content">
+          <Carousel></Carousel>
+        </div>
+      </el-col>
+      <el-col :span="7">
+        <div class="right-content">
+          <div class="shortcut">
+            <div class="title">快捷面板</div>
+            <div class="content">
+              <el-button v-if="$store.state.username==null" @click="toLogin">登录</el-button>
+              <el-button v-if="$store.state.username==null" @click="toRegister">注册</el-button>
+              <el-button v-if="$store.state.username!=null" @click="toMyActivity">我的活动</el-button>
+              <el-button v-if="$store.state.username!=null" @click="toMyFund">我的基金</el-button>
+              <el-button @click="toApplyHelp">帮助申请基金</el-button>
+              <el-button @click="toRaiseHelp">代写轻松筹/水滴筹</el-button>
+            </div>
+          </div>
+        </div>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col>
+        <ActivityPanel></ActivityPanel>
+      </el-col>
+    </el-row>
+    <!-- 
+    <el-container style="color: #5a78b8">
+      <el-aside style="width: 80%;margin: 0px;padding: 0px;font-weight: bold">
+        <hr style="margin-top: 10px;margin-left: 10px" noshade="true" size="1px" />
+      </el-aside>灰雀----迷途的家庭与世界的全部
+    </el-container>
+    <el-container>
+      <el-main>
+        <div class="box-card">
+          <el-container>
+            <el-main>
+              <Carousel />
+            </el-main>
+            <el-footer>
+              <Speaker />
+            </el-footer>
+            <div>
+              <div class="box-card1" @click="toApplyHelp">帮助申请基金</div>
+              <div class="box-card1" @click="toRaiseHelp">代写轻松筹/水滴筹</div>
+            </div>
+            <Megtable class="table" />
+          </el-container>
+        </div>
+      </el-main>
+      <el-aside width="34%">
+        <el-container>
+          <el-main>
+            <ActivityPanel />
+          </el-main>
+        </el-container>
+      </el-aside>
+    </el-container>-->
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+import Carousel from "../components/Carousel";
+// import Megtable from "../components/Megtable";
+import Speaker from "../components/Speaker";
+import ActivityPanel from "../components/ActivityPanel";
+import { Row, Col, Button } from "element-ui";
+export default {
+  name: "Activity",
+  methods: {
+    toApplyHelp() {
+      this.$router.push("/apply-help");
+    },
+    toRaiseHelp() {
+      this.$router.push("/raise-help");
+    },
+    toLogin() {
+      this.$router.push("/login");
+    },
+    toRegister() {
+      this.$router.push("/register");
+    },
+    toMyActivity() {
+      this.$router.push("/profile/myactivity");
+    },
+    toMyFund() {
+      this.$router.push("/profile/myfund");
+    },
+  },
+  components: {
+    ActivityPanel,
+    Carousel,
+    // Megtable,
+    Speaker,
+    [Row.name]: Row,
+    [Col.name]: Col,
+    [Button.name]: Button,
+  },
+};
+</script>
+<style lang="scss" scoped>
+.right-content {
+  .shortcut {
+    margin: 0 10px;
+    background-color: #fff;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+    .title {
+      padding: 15px 20px;
+      border-bottom: 1px solid #e1e1e1;
+    }
+    .content {
+      padding: 10px 20px;
+      ::v-deep {
+        .el-button {
+          color: #fff;
+          margin: 5px 0;
+          width: 100%;
+          height: 40px;
+          border-radius: 20px;
+          box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.25);
+          background-color: rgb(47, 134, 249) !important;
+          border: 0 !important;
+        }
+      }
+    }
+  }
+}
+/* .table {
+  margin: 20px;
+}
+.activity {
+  padding: 0px;
+}
+.box-card {
+  margin: 0px;
+  padding: 20px;
+  background: rgb(231, 238, 246);
+  box-sizing: border-box;
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+.box-card1 {
+  width: 44%;
+  float: left;
+  height: 50px;
+  border-collapse: collapse;
+  text-align: center;
+  line-height: 45px;
+  margin: 6px 20px;
+  font-size: 20px;
+  background: rgb(39, 77, 160);
+  box-sizing: border-box;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 25px;
+  color: #e7eef6;
+  font-weight: bold;
+} */
+</style>

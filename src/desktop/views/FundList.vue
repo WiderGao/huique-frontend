@@ -1,7 +1,7 @@
 <template>
-  <div class="app">
+  <div class="fund-list-wrap">
     <el-container>
-      <el-main class="fundlist">
+      <el-aside class="fundlist" width="320px">
         <div class="dieasename">
           <p style="font-size: 23px">{{dieasename}}</p>
           <p style="color:#959394;">的有关基金组织</p>
@@ -12,23 +12,26 @@
           :key="item.fundid"
           @click="[changeActive(item.fundid),toDetail(item.fundid)]"
         >{{item.name}}</div>
-      </el-main>
-      <el-footer style="margin: 0px;padding: 0px">
+      </el-aside>
+      <el-main class="funddetail" v-if="$route.params.fundid!=undefined">
         <router-view></router-view>
-      </el-footer>
+      </el-main>
     </el-container>
   </div>
 </template>
 
 <script>
 import api from "@/api";
-import { Container, Main, Footer } from "element-ui";
+import { Container, Main, Aside, Footer, Row, Col } from "element-ui";
 export default {
   name: "FundLis",
   components: {
     [Container.name]: Container,
     [Main.name]: Main,
+    [Aside.name]: Aside,
     [Footer.name]: Footer,
+    [Row.name]: Row,
+    [Col.name]: Col,
   },
   data() {
     return {
@@ -50,15 +53,17 @@ export default {
     },
   },
   created() {
-    this.$ajax.get("fundtypemsg/fundmsg", {
-      params: {
-        name: this.$route.params.disease,
-      },
-    });
+    // this.$ajax.get("fundtypemsg/fundmsg", {
+    //   params: {
+    //     name: this.$route.params.disease,
+    //   },
+    // });
     this.getDiease();
     api.Fund.getClassifiedFund(this.$route.params.disease)
       .then((data) => {
         this.fundList = data;
+        this.changeActive(this.$route.params.fundid);
+        console.log(this.flag);
       })
       .catch((error) => {
         console.log(error);
@@ -68,19 +73,22 @@ export default {
 </script>
 
 <style scoped>
-.app {
-  margin: 0px;
-  padding: 0px;
+.fundlist {
+  margin: 0 auto;
+  padding: 10px;
+  overflow: visible;
+}
+.funddetail {
+  padding: 10px;
+  overflow: visible;
+  width: calc(100% - 360px);
 }
 .dieasename {
-  margin: 50px 500px;
-  width: 240px;
-  height: 110px;
-  margin-bottom: 10px;
+  margin: 50px auto;
+  max-width: 240px;
   background: rgba(255, 255, 255, 1);
   padding: 20px;
-  box-sizing: border-box;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
   border-radius: 30px;
   text-align: center;
   line-height: 35px;
@@ -88,31 +96,23 @@ export default {
 }
 
 .box-card {
-  width: 40%;
-  float: left;
-  height: 50px;
+  min-height: 50px;
+  line-height: 50px;
   border-collapse: collapse;
   text-align: center;
-  margin: 15px 60px;
+  margin: 15px auto;
+  padding: 0 15px;
+  cursor: pointer;
   font-size: 15px;
-  background: rgb(231, 238, 246);
-  box-sizing: border-box;
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+  background: #fff;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
   border-radius: 25px;
   color: #39456b;
   font-weight: bold;
 }
 .active {
-  background-color: rgba(144, 238, 144, 0.5);
-}
-.fundlist {
-  width: 100%;
-  height: 700px;
-  background: url("../../assets/img/bg.svg") no-repeat 0px 0px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
+  background-color: #409eff;
+  color: #fff;
 }
 </style>
 

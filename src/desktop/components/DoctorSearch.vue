@@ -1,31 +1,25 @@
 <template>
-  <div class="app">
+  <div class="doctor-search-wrap">
     <el-container>
-        <el-aside class="aside">
-          <div class="header">
-            <div class="text">
-              <p>医生</p>
-              <p>信息</p>
-              <p>查询</p>
-            </div>
-            <div v-if="searchValue===''" class="search-info-desc">
-              <p>科室</p>
-            </div>
+      <el-aside class="aside">
+        <div class="header">
+          <div class="text">
+            <p>医生</p>
+            <p>信息</p>
+            <p>查询</p>
           </div>
-        </el-aside>
+          <div v-if="searchValue===''" class="search-info-desc">
+            <p>科室</p>
+          </div>
+        </div>
+      </el-aside>
       <el-main class="main">
-<!--        <div v-for="item in showList" class="showlist">-->
-<!--          <el-card :body-style="{ padding: '0px' }" style="height: 50px;padding: 10px">-->
-<!--            <div @click="toDetail(item)">{{item}}</div>-->
-<!--          </el-card>-->
-<!--        </div>-->
-        <div
-          v-for="item in showList"
-          is-link
-          center
-          class="showlist"
-          @click="toDetail(item)"
-        >
+        <!--        <div v-for="item in showList" class="showlist">-->
+        <!--          <el-card :body-style="{ padding: '0px' }" style="height: 50px;padding: 10px">-->
+        <!--            <div @click="toDetail(item)">{{item}}</div>-->
+        <!--          </el-card>-->
+        <!--        </div>-->
+        <div v-for="item in showList" is-link center class="showlist" @click="toDetail(item)">
           <div style="padding: 18px;line-height: 20px;margin: 0px">
             <p style="font-size: 20px">{{item}}</p>
           </div>
@@ -37,7 +31,7 @@
 
 <script>
 import api from "@/api";
-import { Container, Header, Main, Card ,Aside} from "element-ui";
+import { Container, Header, Main, Card, Aside } from "element-ui";
 export default {
   name: "DoctorSearch",
   components: {
@@ -85,13 +79,13 @@ export default {
 </script>
 
 <style scoped>
-  .search-info-desc {
-    line-height: 20px;
-    font-size: 20px;
-    color: #fff;
-    width: 100%;
-    text-align: center;
-  }
+.search-info-desc {
+  line-height: 20px;
+  font-size: 20px;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+}
 .header {
   margin-top: 30px;
   margin-left: 60px;
@@ -118,15 +112,15 @@ export default {
 .main {
   margin-top: 0px;
 }
-  .showlist {
-    float: left;
-    position: relative;
-    margin: 10px;
-    width: 280px;
-    height: 110px;
-    background-color: white;
-    box-sizing: border-box;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
-    border-radius: 15px;
-  }
+.showlist {
+  float: left;
+  position: relative;
+  margin: 10px;
+  width: 266px;
+  height: 110px;
+  background-color: white;
+  box-sizing: border-box;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+}
 </style>

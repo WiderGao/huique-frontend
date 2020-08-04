@@ -1,34 +1,29 @@
 <template>
-  <div class="app">
-    <el-row style="width: 200%">
-      <el-col :span="12">
-        <el-card :body-style="{ padding: '0px' }" shadow="hover">
-          <img :src="detail.img" class="image" />
-          <div style="padding: 14px;">
-            <span>{{detail.name}}</span>
-            <br />
-            <span style="font-size: 13px">{{detail.place}}</span>
-            <div class="bottom clearfix">
-              <time class="time">{{ detail.deadline+'报名截止' }}</time>
-              <el-button type="text" class="button" @click="onClick">查看详情</el-button>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
+  <div class="activity-item-wrap">
+    <el-card :body-style="{ padding: '0px' }">
+      <el-image :src="detail.img" fit="cover" style="height:250px;width:100%;" />
+      <div style="padding: 14px;">
+        <span>{{detail.name}}</span>
+        <br />
+        <span style="font-size: 13px">{{detail.place}}</span>
+        <div class="bottom clearfix">
+          <time class="time">{{ detail.deadline+'报名截止' }}</time>
+          <el-button type="text" class="button" @click="onClick">查看详情</el-button>
+        </div>
+      </div>
+    </el-card>
   </div>
 </template>
 
 <script>
-import { Row, Col, Card, Button } from "element-ui";
+import { Card, Button, Image } from "element-ui";
 export default {
   props: ["detail", "to", "href"],
   name: "ActivitiesItems",
   components: {
-    [Row.name]: Row,
-    [Col.name]: Col,
     [Card.name]: Card,
     [Button.name]: Button,
+    [Image.name]: Image,
   },
   methods: {
     onClick() {
@@ -39,7 +34,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .time {
   font-size: 13px;
   color: #999;
@@ -55,14 +50,6 @@ export default {
   float: right;
 }
 
-.image {
-  width: 100%;
-  display: block;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-size: cover;
-}
 .clearfix:before,
 .clearfix:after {
   display: table;
@@ -71,5 +58,9 @@ export default {
 
 .clearfix:after {
   clear: both;
+}
+.el-card {
+  border: 0;
+  border-radius: 14px;
 }
 </style>
