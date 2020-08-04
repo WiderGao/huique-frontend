@@ -168,6 +168,14 @@ const routes = [
       requireAuth: true
     }
   },
+  {
+    path: '*',
+    component: () =>import('../views/404'),
+    meta: {
+      title: '页面未找到',
+      requireAuth: false
+    }
+  },
 
 ]
 

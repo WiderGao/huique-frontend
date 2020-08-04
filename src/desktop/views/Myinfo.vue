@@ -58,8 +58,6 @@ import { Card, Form, FormItem, Button, Input } from "element-ui";
 export default {
   name: "Myinfo",
   components: {
-    MyActivities,
-    MyFund,
     [Card.name]: Card,
     [Form.name]: Form,
     [FormItem.name]: FormItem,

@@ -5,7 +5,9 @@
         <div class="header">
           <h2
             style="margin-left: 15px"
-          >我的信息 {{$store.state.username==null?'':$store.state.username}}</h2>
+            v-if="$store.state.username==null"
+          >我的信息 </h2>
+          <h2 v-else>欢迎回来  {{$store.state.username==null?'':$store.state.username}}</h2>
           <h3 style="float: right;margin-top: 0px" class="name"></h3>
         </div>
       </el-header>

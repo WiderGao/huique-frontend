@@ -10,7 +10,7 @@
       <p>{{item.answer}}</p>
     </div>
     <div>
-      <el-button type="info" @click="handleFeedback" style="margin:0 auto;display: block;">我要反馈</el-button>
+      <el-button type="primary" @click="handleFeedback" style="margin:0 auto;display: block;">我要反馈</el-button>
     </div>
   </div>
 </template>
