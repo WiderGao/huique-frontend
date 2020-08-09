@@ -10,7 +10,8 @@ import { Message } from "element-ui";
 Vue.use(VueCookies)
 
 if (process.env.NODE_ENV == "development")
-  axios.defaults.baseURL = "http://api2.wider.ink";
+  // axios.defaults.baseURL = "http://api2.wider.ink";
+  axios.defaults.baseURL = "http://127.0.0.1:3000";
 else if (process.env.NODE_ENV == "production")
   axios.defaults.baseURL = "http://api.wider.ink";
 

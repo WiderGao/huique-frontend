@@ -11,29 +11,30 @@
         <el-button v-else type="primary" @click="handleStore">收藏</el-button>
       </div>
       <div class="content">
-        <div class="record_num">
+        <div class="record_num" v-if="detail.record_num">
           <el-tag type="success">备案号</el-tag>
           <div>{{detail.record_num}}</div>
         </div>
-        <div class="people">
+        <div class="people" v-if="detail.people">
           <el-tag type="success">资助对象</el-tag>
           <div>{{detail.people}}</div>
         </div>
-        <div class="mode">
+        <div class="mode" v-if="detail.mode">
           <el-tag type="success">资助方式</el-tag>
           <div>{{detail.mode}}</div>
         </div>
-        <div class="process">
+        <div class="process" v-if="detail.process_img||detail.process_text">
           <el-tag type="success">申请流程</el-tag>
-          <div>
+          <div v-if="detail.process_img">
             <img :src="detail.process_img" />
           </div>
+          <div v-if="detail.process_text">{{detail.process_text}}</div>
         </div>
-        <div class="contact">
+        <div class="contact" v-if="detail.contact">
           <el-tag type="success">联系方式</el-tag>
           <div>{{detail.contact}}</div>
         </div>
-        <div class="form">
+        <div class="form" v-if="detail.form">
           <el-tag type="success">申请表</el-tag>
           <a :href="detail.form">{{detail.form}}</a>
         </div>

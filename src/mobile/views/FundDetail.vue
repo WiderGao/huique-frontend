@@ -6,16 +6,17 @@
           <div class="title">{{detail.name}}</div>
         </template>
       </van-cell>
-      <van-cell title="备案号" :label="detail.record_num" clickable center></van-cell>
-      <van-cell title="资助对象" :label="detail.people" clickable center></van-cell>
-      <van-cell title="资助方式" :label="detail.mode" clickable center></van-cell>
-      <van-cell title="申请流程" clickable center>
+      <van-cell title="备案号" v-if="detail.record_num" :label="detail.record_num" clickable center></van-cell>
+      <van-cell title="资助对象" v-if="detail.people" :label="detail.people" clickable center></van-cell>
+      <van-cell title="资助方式" v-if="detail.mode" :label="detail.mode" clickable center></van-cell>
+      <van-cell title="申请流程" v-if="detail.process_img||detail.process_text" clickable center>
         <template #label>
-          <van-image :src="detail.process_img"></van-image>
+          <van-image v-if="detail.process_img" :src="detail.process_img"></van-image>
+          <div v-if="detail.process_text">{{detail.process_text}}</div>
         </template>
       </van-cell>
-      <van-cell title="联系方式" :label="detail.contact" clickable center></van-cell>
-      <van-cell title="申请表下载" :url="detail.form" is-link center></van-cell>
+      <van-cell title="联系方式" v-if="detail.contact" :label="detail.contact" clickable center></van-cell>
+      <van-cell title="申请表下载" v-if="detail.form" :url="detail.form" is-link center></van-cell>
     </van-cell-group>
     <div style="margin: 16px;">
       <van-button v-if="stored" round block type="info" @click="handleCancel">取消收藏</van-button>
