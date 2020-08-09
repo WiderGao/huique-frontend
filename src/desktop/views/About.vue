@@ -2,12 +2,12 @@
     <main class="main">
         <div class="box-card">
             <div class="text1">
-               <p class="title">功能简介</p>
-                <p class="content">{{feature}}</p>
-            </div>
-            <div class="text1">
                 <p class="title">灰雀简介</p>
                 <p class="content">{{huique}}</p>
+            </div>
+            <div class="text1">
+               <p class="title">功能简介</p>
+                <p class="content">{{feature}}</p>
             </div>
             <div class="text2" >
                 <div class="title">作者</div>
