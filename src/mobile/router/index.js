@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
 import axios from 'axios'
+import extra from './extra.js'
 
 const ActivityPage = () => import('../views/Activity.vue')
 const ActivityDetail = () => import('../views/ActivityDetail.vue')
@@ -212,7 +213,8 @@ const routes = [
       title: '页面未找到',
       requireAuth: false
     }
-  }
+  },
+  ...extra
 ]
 
 const router = new VueRouter({

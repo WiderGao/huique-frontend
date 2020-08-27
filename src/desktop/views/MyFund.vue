@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import { Cell, CellGroup, Empty } from "vant";
 import api from "@/api";
 export default {
   components: {

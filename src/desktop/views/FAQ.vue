@@ -31,7 +31,7 @@ export default {
     handleFeedback() {},
   },
   created() {
-    this.$ajax.get("/helpmsg").then((response) => {
+    api.Common.getHelp().then((response) => {
       if (response.data.status == 200) {
         this.faq = response.data.msg;
       }

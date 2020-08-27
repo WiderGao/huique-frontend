@@ -14,10 +14,13 @@
       <el-menu-item index="1" @click="toActivity">
         <span>主页-活动</span>
       </el-menu-item>
-      <el-menu-item index="2" @click="toInfo">
+      <el-menu-item index="2" @click="toWish">
+        <span>小小心愿单</span>
+      </el-menu-item>
+      <el-menu-item index="3" @click="toInfo">
         <span>信息查询</span>
       </el-menu-item>
-      <el-menu-item index="3" @click="toProfile">
+      <el-menu-item index="4" @click="toProfile">
         <span>我的信息</span>
       </el-menu-item>
     </el-menu>
@@ -43,13 +46,17 @@ export default {
       this.$router.push("/activity");
       this.flag = "1";
     },
+    toWish() {
+      this.$router.push("/event/wishlist");
+      this.flag = "2";
+    },
     toInfo() {
       this.$router.push("/info");
-      this.flag = "2";
+      this.flag = "3";
     },
     toProfile() {
       this.$router.push("/profile");
-      this.flag = "3";
+      this.flag = "4";
     },
   },
 };

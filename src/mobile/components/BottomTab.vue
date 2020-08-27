@@ -20,6 +20,7 @@
 <script>
 import Vicon from "vue-awesome/components/Icon";
 import "vue-awesome/icons/home";
+import "vue-awesome/icons/gift";
 import "vue-awesome/icons/search";
 import "vue-awesome/icons/user";
 import "vue-awesome/icons/regular/user";
@@ -45,6 +46,15 @@ export default {
             inactive: "home",
           },
           to: "/activity",
+        },
+        {
+          name: "WishList",
+          title: "心愿单",
+          icon: {
+            active: "gift",
+            inactive: "gift",
+          },
+          to: "/event/wishlist",
         },
         {
           name: "Info",

@@ -24,7 +24,7 @@
 import api from "@/api";
 import { Container, Main, Aside, Footer, Row, Col } from "element-ui";
 export default {
-  name: "FundLis",
+  name: "FundList",
   components: {
     [Container.name]: Container,
     [Main.name]: Main,

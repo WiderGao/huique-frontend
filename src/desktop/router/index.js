@@ -2,6 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
 import api from '@/api'
+
+import extra from './extra.js'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -170,13 +173,13 @@ const routes = [
   },
   {
     path: '*',
-    component: () =>import('../views/404'),
+    component: () => import('../views/404'),
     meta: {
       title: '页面未找到',
       requireAuth: false
     }
   },
-
+  ...extra
 ]
 
 const router = new VueRouter({
