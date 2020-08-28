@@ -63,7 +63,7 @@ export default {
         this.paintlist = data.map((item) => {
           return {
             id: item.id,
-            author: item.author,
+            alias: item.alias,
             painting: item.painting,
           };
         });
