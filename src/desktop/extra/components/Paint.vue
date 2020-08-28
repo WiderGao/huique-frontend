@@ -1,13 +1,22 @@
 <template>
   <div class="paint-wrap">
     <div class="author">作者：{{author}}</div>
-    <img class="painting" :src="paint" alt />
+    <el-image class="painting" :src="paint" fit="cover">
+      <div slot="placeholder" class="image-slot">
+        加载中
+        <span class="dot">...</span>
+      </div>
+    </el-image>
   </div>
 </template>
 
 <script>
+import { Image } from "element-ui";
 export default {
   props: ["author", "paint"],
+  components: {
+    [Image.name]: Image,
+  },
 };
 </script>
 
@@ -31,11 +40,20 @@ export default {
       background-color: rgba(0, 0, 0, 0.5);
     }
   }
+  .image-slot {
+    display: block;
+    width: 600px;
+  }
   .painting {
-    max-height: 100%;
-    min-width: 100%;
-    object-fit: cover;
-    height: 300px;
+    height: 100%;
+    width: 100%;
+    ::v-deep img {
+      display: block;
+      max-height: 100%;
+      min-width: 100%;
+      height: 300px;
+      width: auto;
+    }
   }
 }
 </style>

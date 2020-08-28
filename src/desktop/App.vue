@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div id="app">
     <top-header></top-header>
     <router-view class="view"></router-view>
     <bottom-footer></bottom-footer>
@@ -27,12 +27,11 @@ export default {
 body {
   background: #274995;
 }
-.app {
+#app {
   background: #f3c9a9 url("~@/assets/img/bg.svg") bottom/100% no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
 }
 .view {
   max-width: 1200px;
