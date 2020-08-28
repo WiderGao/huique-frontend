@@ -23,6 +23,9 @@
       <el-menu-item index="4" @click="toProfile">
         <span>我的信息</span>
       </el-menu-item>
+      <el-menu-item index="5" @click="jumpToQueyuGame">
+        <span>雀语互动游戏</span>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -58,6 +61,9 @@ export default {
       this.$router.push("/profile");
       this.flag = "4";
     },
+    jumpToQueyuGame() {
+      window.open("https://static.wider.ink/queyu");
+    },
   },
 };
 </script>
@@ -71,10 +77,7 @@ export default {
   margin: 0;
   background-color: #fff;
   .header {
-    position: absolute;
     display: flex;
-    top: 0;
-    left: 0;
     height: 60px;
     width: 220px;
     .line {
@@ -85,10 +88,10 @@ export default {
   .menu {
     display: flex;
     justify-content: space-between;
-    margin: 0 auto;
+    margin-left: 8%;
     background-color: unset;
     .el-menu-item {
-      margin: 0 68px;
+      margin: 0 34px;
       padding: 0;
       span {
         background-color: rgb(255, 188, 53);

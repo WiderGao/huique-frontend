@@ -5,6 +5,7 @@
         v-for="item in menu"
         :key="item.name"
         :name="item.name"
+        :url="item.url"
         :to="item.to"
         replace
       >
@@ -24,6 +25,7 @@ import "vue-awesome/icons/gift";
 import "vue-awesome/icons/search";
 import "vue-awesome/icons/user";
 import "vue-awesome/icons/regular/user";
+import "vue-awesome/icons/gamepad";
 
 import { Tabbar, TabbarItem, Icon } from "vant";
 
@@ -73,6 +75,15 @@ export default {
             inactive: "regular/user",
           },
           to: "/profile",
+        },
+        {
+          name: "WisyList",
+          title: "雀语H5",
+          icon: {
+            active: "gamepad",
+            inactive: "gamepad",
+          },
+          url: "https://static.wider.ink/queyu",
         },
       ],
     };

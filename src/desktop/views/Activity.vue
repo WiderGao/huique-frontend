@@ -9,16 +9,17 @@ div<template>
       </el-col>
       <el-col :span="7">
         <div class="right-content">
-          <div class="shortcut">
-            <div class="title">快捷面板</div>
-            <div class="content">
-              <el-button v-if="$store.state.username==null" @click="toLogin">登录</el-button>
-              <el-button v-if="$store.state.username==null" @click="toRegister">注册</el-button>
-              <el-button v-if="$store.state.username!=null" @click="toMyActivity">我的活动</el-button>
-              <el-button v-if="$store.state.username!=null" @click="toMyFund">我的基金</el-button>
-              <el-button @click="toApplyHelp">帮助申请基金</el-button>
-              <el-button @click="toRaiseHelp">代写轻松筹/水滴筹</el-button>
-            </div>
+          <div class="login-shortcut shortcut" @click="toLogin" v-if="$store.state.username==null">
+            <img src="@/assets/img/login.jpg" alt />
+          </div>
+          <div class="help1-shortcut shortcut" @click="toApplyHelp">
+            <img src="@/assets/img/help1.jpg" alt />
+          </div>
+          <div class="help2-shortcut shortcut" @click="toRaiseHelp">
+            <img src="@/assets/img/help2.jpg" alt />
+          </div>
+          <div class="wishlist-shortcut shortcut" @click="toWishList">
+            <img src="@/assets/img/wishlist.jpg" alt />
           </div>
         </div>
       </el-col>
@@ -91,6 +92,9 @@ export default {
     toMyFund() {
       this.$router.push("/profile/myfund");
     },
+    toWishList() {
+      this.$router.push("/event/wishlist");
+    },
   },
   components: {
     ActivityPanel,
@@ -105,32 +109,54 @@ export default {
 </script>
 <style lang="scss" scoped>
 .right-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  height: 400px;
   .shortcut {
-    margin: 0 10px;
-    background-color: #fff;
-    height: 400px;
-    border-radius: 10px;
-    box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
-    .title {
-      padding: 15px 20px;
-      border-bottom: 1px solid #e1e1e1;
+    display: block;
+    cursor: pointer;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    flex: 1;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border-radius: 16px;
+    overflow: hidden;
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
     }
-    .content {
-      padding: 10px 20px;
-      ::v-deep {
-        .el-button {
-          color: #fff;
-          margin: 5px 0;
-          width: 100%;
-          height: 40px;
-          border-radius: 20px;
-          box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.25);
-          background-color: rgb(47, 134, 249) !important;
-          border: 0 !important;
-        }
-      }
+    &:last-child {
+      margin-bottom: 0;
     }
   }
+  // .shortcut {
+  //   margin: 0 10px;
+  //   background-color: #fff;
+  //   height: 400px;
+  //   border-radius: 10px;
+  //   box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+  //   .title {
+  //     padding: 15px 20px;
+  //     border-bottom: 1px solid #e1e1e1;
+  //   }
+  //   .content {
+  //     padding: 10px 20px;
+  //     ::v-deep {
+  //       .el-button {
+  //         color: #fff;
+  //         margin: 5px 0;
+  //         width: 100%;
+  //         height: 40px;
+  //         border-radius: 20px;
+  //         box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.25);
+  //         background-color: rgb(47, 134, 249) !important;
+  //         border: 0 !important;
+  //       }
+  //     }
+  //   }
+  // }
 }
 /* .table {
   margin: 20px;
