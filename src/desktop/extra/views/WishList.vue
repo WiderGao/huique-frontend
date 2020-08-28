@@ -23,7 +23,7 @@
         class="painting"
         v-for="paint in paintlist"
         :key="paint.id"
-        :author="paint.author"
+        :author="paint.alias"
         :paint="paint.painting"
       ></paint>
     </div>
