@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import api from "@/api";
 import { Button } from "element-ui";
 export default {
   name: "FAQ",
@@ -31,10 +32,8 @@ export default {
     handleFeedback() {},
   },
   created() {
-    api.Common.getHelp().then((response) => {
-      if (response.data.status == 200) {
-        this.faq = response.data.msg;
-      }
+    api.Common.getHelp().then((data) => {
+      this.faq = data;
     });
   },
 };

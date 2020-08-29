@@ -13,11 +13,6 @@
 <script>
 import api from "@/api";
 export default {
-  components: {
-    [Cell.name]: Cell,
-    [CellGroup.name]: CellGroup,
-    [Empty.name]: Empty,
-  },
   data() {
     return {
       fund: [],
@@ -59,11 +54,6 @@ export default {
   padding: 20px;
   height: 500px;
   color: #fff;
-}
-.my-activity-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
 }
 .box-card {
   min-height: 50px;

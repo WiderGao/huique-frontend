@@ -1,6 +1,6 @@
 <template>
-  <main class="main">
-    <div class="box-card">
+  <div class="about-wrap">
+    <el-card header="关于灰雀">
       <div class="text1">
         <p class="title">灰雀简介</p>
         <p class="content">{{huique}}</p>
@@ -17,8 +17,8 @@
           :key="item.authorid"
         >姓名：{{item.name}} 微信号：{{item.wxnumber}}</div>
       </div>
-    </div>
-    <section class="list-item">
+    </el-card>
+    <!-- <section class="list-item">
       <div class="item-image">
         <img src="../../assets/images/1.jpg" alt="item-image-1" />
       </div>
@@ -76,14 +76,18 @@
         <div class="item-title">「从今往后」</div>
         <div class="item-desc">我们也将陪伴在每一位医疗移民身边</div>
       </div>
-    </section>
-  </main>
+    </section>-->
+  </div>
 </template>
 
 <script>
 import api from "@/api";
+import { Card } from "element-ui";
 export default {
   name: "About",
+  components: {
+    [Card.name]: Card,
+  },
   data() {
     return {
       feature: "",
@@ -127,31 +131,7 @@ export default {
 </script>
 
 <style scoped>
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  padding: 0;
-  margin: 0;
-}
-
-html {
-  /* 需要隐藏最外层不可见区域以使视差生效 */
-  overflow: hidden;
-}
-
-body {
-  width: 100vw;
-  height: 100vh;
-  perspective: 100px;
-  transform-style: preserve-3d;
-  /* 3D的容器要允许overflow才能生效 */
-  overflow-y: auto;
-}
-
-.main {
+/* .main {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -223,7 +203,12 @@ body {
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
-
+*/
+.el-card {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
 .title {
   font-size: 23px;
 }
@@ -232,12 +217,10 @@ body {
   color: #959394;
 }
 .text1 {
-  text-align: center;
   line-height: 35px;
 }
 .text2 {
-  text-align: center;
   line-height: 35px;
-  margin: auto 35%;
+  /* margin: auto 35%; */
 }
 </style>
