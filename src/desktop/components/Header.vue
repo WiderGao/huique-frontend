@@ -62,7 +62,7 @@ export default {
       this.flag = "4";
     },
     jumpToQueyuGame() {
-      window.open("https://static.wider.ink/queyu");
+      window.open("https://static.wider.ink/queyu/");
     },
   },
 };

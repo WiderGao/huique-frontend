@@ -94,11 +94,10 @@ export default {
   align-items: center;
   .wish {
     width: 100%;
-    height: 200px;
-    margin: 12px;
+    height: 150px;
+    margin: 12px 10px 0 10px;
     &:last-child {
-      flex-grow: 0;
-      margin-right: auto;
+      margin-bottom: 12px;
     }
   }
 }

@@ -83,7 +83,7 @@ export default {
             active: "gamepad",
             inactive: "gamepad",
           },
-          url: "https://static.wider.ink/queyu",
+          url: "https://static.wider.ink/queyu/",
         },
       ],
     };

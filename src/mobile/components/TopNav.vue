@@ -25,7 +25,7 @@
         <van-image :src="require('@/assets/img/header.png')" fit="scale-down" height="46"></van-image>
       </template>-->
       <template #right>
-        <v-icon name="share-alt" color="#1989fa" scale="1.15"></v-icon>
+        <!-- <v-icon name="share-alt" color="#1989fa" scale="1.15"></v-icon> -->
       </template>
     </van-nav-bar>
     <van-share-sheet v-model="showShare" :options="options" title="立即分享给好友"></van-share-sheet>
