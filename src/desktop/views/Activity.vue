@@ -1,6 +1,7 @@
 div<template>
   <div class="activity">
     <Speaker></Speaker>
+
     <el-row :gutter="10">
       <el-col :span="17">
         <div class="left-content">
@@ -24,6 +25,7 @@ div<template>
         </div>
       </el-col>
     </el-row>
+
     <el-row>
       <el-col>
         <ActivityPanel></ActivityPanel>

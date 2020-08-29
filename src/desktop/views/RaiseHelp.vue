@@ -1,31 +1,33 @@
 <template>
-  <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
-    <el-form-item label="姓名">
-      <el-input v-model="phone" type="text" placeholder="请输入您的姓名" rows="1" required readonly></el-input>
-    </el-form-item>
-    <el-form-item label="手机号码">
-      <el-input v-model="phone" type="tel" placeholder="请输入您的手机号码" rows="1" required readonly></el-input>
-    </el-form-item>
-    <el-form-item label="情况描述">
-      <el-input
-        v-model="details"
-        type="textarea"
-        placeholder="请输入您的实际情况"
-        autosize
-        rows="1"
-        required
-      ></el-input>
-    </el-form-item>
-    <el-button round block type="primary" @click="handleSubmit">提交</el-button>
-  </el-form>
+  <el-card header="代写轻松筹、水滴筹——提交申请">
+    <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
+      <el-form-item label="姓名">
+        <el-input v-model="name" type="text" placeholder="请输入您的姓名" rows="1" required></el-input>
+      </el-form-item>
+      <el-form-item label="手机号码">
+        <el-input v-model="phone" type="tel" placeholder="请输入您的手机号码" rows="1" required></el-input>
+      </el-form-item>
+      <el-form-item label="情况描述">
+        <el-input
+          v-model="details"
+          type="textarea"
+          placeholder="请输入您的实际情况"
+          :autosize="{ minRows: 3, maxRows: 3000}"
+          required
+        ></el-input>
+      </el-form-item>
+      <el-button type="primary" style="display:block;margin:0 0 0 auto" @click="handleSubmit">提交</el-button>
+    </el-form>
+  </el-card>
 </template>
 
 <script>
 import api from "@/api";
-import { Form, FormItem, Button, Input } from "element-ui";
+import { Card, Form, FormItem, Button, Input } from "element-ui";
 export default {
   name: "RaiseHelp",
   components: {
+    [Card.name]: Card,
     [Form.name]: Form,
     [FormItem.name]: FormItem,
     [Button.name]: Button,
@@ -60,4 +62,7 @@ export default {
 </script>
 
 <style scoped>
+.el-card {
+  max-width: 800px;
+}
 </style>

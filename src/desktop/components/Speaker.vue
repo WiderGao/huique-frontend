@@ -1,6 +1,6 @@
 <template>
   <div class="speaker-wrap">
-    <hr noshade="true" size="3px" color="#3986e5" style="margin-bottom: 5px" />
+    <!-- <hr noshade="true" size="3px" color="#3986e5" style="margin-bottom: 5px" /> -->
     <div class="main">
       <v-icon name="volume-up"></v-icon>
       <div class="content">{{ msg }}</div>
@@ -38,6 +38,6 @@ export default {
   }
 }
 .speaker-wrap {
-  margin: 5px 10px;
+  margin: 10px;
 }
 </style>
