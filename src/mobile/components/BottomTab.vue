@@ -78,7 +78,7 @@ export default {
         },
         {
           name: "WisyList",
-          title: "雀语H5",
+          title: "雀羽H5",
           icon: {
             active: "gamepad",
             inactive: "gamepad",

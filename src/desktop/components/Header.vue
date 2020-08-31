@@ -24,7 +24,7 @@
         <span>我的信息</span>
       </el-menu-item>
       <el-menu-item index="5" @click="jumpToQueyuGame">
-        <span>雀语互动游戏</span>
+        <span>雀羽H5</span>
       </el-menu-item>
     </el-menu>
   </div>
